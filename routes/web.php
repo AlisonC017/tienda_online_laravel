@@ -21,16 +21,21 @@ Route::get('/a', function () {
     return view('modules.admin.index');
 });
 
+Route::get('/t', function () {
+    return view('modules.tienda.index');
+});
+
+
 
 
 Route::middleware('auth')->group(function () {
 
 
     // rutas para tienda
-    Route::middleware('rol:tienda')->group(function () {});
+    //  Route::middleware('rol:tienda')->group(function () {});
 
     // rutas  para admin
-    Route::middleware('rol:administrador')->group(function () {});
+    //  Route::middleware('rol:administrador')->group(function () {});
 });
 
 Route::get('/login', [ControllerNavigation::class, 'login'])->name('login');
