@@ -85,7 +85,7 @@
         </div>
 
         <!--  Get A Quote  -->
-        <a href="" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block rounded-0 ms-4">
+        <a href="{{ route('login') }}" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block rounded-0 ms-4">
             Iniciar Sesión<i class="fa fa-arrow-right ms-3"></i>
         </a>
     </div>
