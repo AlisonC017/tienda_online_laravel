@@ -13,6 +13,14 @@ Route::get('/p', function () {
     return view('modules.landing.productos.index');
 });
 
+Route::get('/ps', function () {
+    return view('modules.landing.productos.show');
+});
+
+Route::get('/ti', function () {
+    return view('modules.landing.tiendas.index');
+});
+
 Route::get('/l', function () {
     return view('login');
 });
@@ -24,6 +32,8 @@ Route::get('/a', function () {
 Route::get('/t', function () {
     return view('modules.tienda.index');
 });
+
+
 
 
 
