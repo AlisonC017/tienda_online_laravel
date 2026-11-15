@@ -14,7 +14,7 @@ class ControllerAuth extends Controller
         $request->validate([
             'nombre' => 'required',
             'correo' => 'required|email|unique:usuarios,correo',
-            'password' => 'required|confirmed'
+            'password' => 'required|min:5'
         ]);
 
         $user = new User();

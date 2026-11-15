@@ -41,8 +41,8 @@
                         <h1 class="cl-login10__title">Bienvenido ❤️</h1>
                         <div class="cl-login10__field" data-field>
                             <label class="cl-login10__label" for="cl-login10-l-email">Correo</label>
-                            <input class="cl-login10__input" id="cl-login10-l-email" name="email" type="email"
-                                value="{{ old('email') }}" autocomplete="username" required
+                            <input class="cl-login10__input" id="cl-login10-l-email" name="correo" type="email"
+                                value="{{ old('correo') }}" autocomplete="username" required
                                 data-msg="Ingresa tú correo." aria-describedby="cl-login10-l-email-err">
                             <p class="cl-login10__error" id="cl-login10-l-email-err" data-error></p>
                         </div>
@@ -85,18 +85,19 @@
                 <div class="cl-login10__panel" role="tabpanel" id="cl-login10-panel-signup"
                     aria-labelledby="cl-login10-tab-signup" tabindex="0" hidden>
                     <form class="cl-login10__form" data-form="signup" novalidate>
+                        @csrf
                         <h2 class="cl-login10__title">Empieza en CrikoStore</h2>
                         <div class="cl-login10__field" data-field>
                             <label class="cl-login10__label" for="cl-login10-s-name">Nombre</label>
-                            <input class="cl-login10__input" id="cl-login10-s-name" name="name" type="text"
-                                value="{{ old('name') }}" autocomplete="name" required minlength="2"
+                            <input class="cl-login10__input" id="cl-login10-s-name" name="nombre" type="text"
+                                value="{{ old('nombre') }}" autocomplete="name" required minlength="2"
                                 data-msg="¿Cómo te llamas?" aria-describedby="cl-login10-s-name-err">
                             <p class="cl-login10__error" id="cl-login10-s-name-err" data-error></p>
                         </div>
                         <div class="cl-login10__field" data-field>
                             <label class="cl-login10__label" for="cl-login10-s-email">Correo</label>
-                            <input class="cl-login10__input" id="cl-login10-s-email" name="email" type="email"
-                                value="{{ old('email') }}" autocomplete="email" required
+                            <input class="cl-login10__input" id="cl-login10-s-email" name="correo" type="email"
+                                value="{{ old('correo') }}" autocomplete="email" required
                                 data-msg="Ingresa tú correo" aria-describedby="cl-login10-s-email-err">
                             <p class="cl-login10__error" id="cl-login10-s-email-err" data-error></p>
                         </div>
