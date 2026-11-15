@@ -8,7 +8,9 @@ class ControllerNavigation extends Controller
 {
     public function dashboard()
     {
-        return view('modules.admin.index');
+        return auth()->user()->rol === 'administrador'
+            ? redirect()->route('admin.index')
+            : redirect()->route('tienda.index');
     }
 
     public function login()

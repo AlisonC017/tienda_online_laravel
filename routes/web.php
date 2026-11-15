@@ -2,59 +2,61 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControllerNavigation;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ControllerAuth;
 
+// PUBLICO
 Route::get('/', function () {
     return view('modules.landing.index');
-});
+})->name('inicio');
 
 Route::get('/p', function () {
     return view('modules.landing.productos.index');
-});
+})->name('productos.index');
 
-Route::get('/ps', function () {
-    return view('modules.landing.productos.show');
-});
+Route::get('/ps/{id}', function ($id) {
+    return view('modules.landing.productos.show', compact('id'));
+})->name('productos.show');
 
 Route::get('/ti', function () {
     return view('modules.landing.tiendas.index');
-});
+})->name('tiendas.index');
 
-Route::get('/l', function () {
-    return view('login');
-});
+Route::get('/ti/{id}', function ($id) {
+    return view('modules.landing.tiendas.show', compact('id'));
+})->name('tiendas.show');
 
-Route::get('/a', function () {
-    return view('modules.admin.index');
-});
+Route::get('/contacto', function () {
+    return view('modules.landing.contacto');
+})->name('contacto');
 
-Route::get('/t', function () {
-    return view('modules.tienda.index');
-});
-
-
-
-
-
-
-Route::middleware('auth')->group(function () {
-
-
-    // rutas para tienda
-    //  Route::middleware('rol:tienda')->group(function () {});
-
-    // rutas  para admin
-    //  Route::middleware('rol:administrador')->group(function () {});
-});
-
+// AUTENTICACION
 Route::get('/login', [ControllerNavigation::class, 'login'])->name('login');
-Route::get('/dashboard', [ControllerNavigation::class, 'dashboard'])->name('dashboard')->middleware('auth');
-
-// --- autenticacion  ---
 Route::post('/login', [ControllerAuth::class, 'login'])->name('login.post');
 Route::post('/register', [ControllerAuth::class, 'register'])->name('register.post');
 
-// --- google ---
+// GOOGLE
 Route::get('/auth/google', [ControllerAuth::class, 'redirectToGoogle'])->name('google.redirect');
 Route::get('/auth/google/callback', [ControllerAuth::class, 'handleGoogleCallback']);
+
+// RUTAS PROTEGIDAS
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/dashboard', [ControllerNavigation::class, 'dashboard'])->name('dashboard');
+
+    // ADMINISTRADOR
+    Route::middleware(['rol:administrador'])->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/', function () {
+            return view('modules.admin.index');
+        })->name('index');
+    });
+
+    // TIENDA
+    Route::middleware(['rol:tienda'])->prefix('tienda')->name('tienda.')->group(function () {
+        Route::get('/', function () {
+            return view('modules.tienda.index');
+        })->name('index');
+    });
+
+    // CERRAR SESION
+    Route::post('/logout', [ControllerAuth::class, 'logout'])->name('logout');
+});
