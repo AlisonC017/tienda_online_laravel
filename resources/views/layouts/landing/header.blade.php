@@ -31,7 +31,7 @@
 
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
-    <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+    <a href="{{ route('home') }}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
         <h2 class="m-0 text-primary">CrikoStore</h2>
     </a>
 
@@ -41,25 +41,21 @@
 
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0 align-items-lg-center">
-            <a href="#" class="nav-item nav-link active">Inicio</a>
-            <a href="#" class="nav-item nav-link">Productos</a>
-            <a href="#" class="nav-item nav-link">Tiendas</a>
-            <a href="contact.html" class="nav-item nav-link">Contacto</a>
+            <a href="{{ route('home') }}"
+                class="nav-item nav-link {{ request()->routeIs('home') ? 'active' : '' }}">Inicio</a>
+            <a href="{{ route('productos.index') }}"
+                class="nav-item nav-link {{ request()->routeIs('productos.*') ? 'active' : '' }}">Productos</a>
+            <a href="{{ route('tiendas.index') }}"
+                class="nav-item nav-link {{ request()->routeIs('tiendas.*') ? 'active' : '' }}">Tiendas</a>
+
 
             <!-- Buscador  -->
-            <form id="search-form" action="#" method="get" class="my-2 my-lg-0 me-lg-3">
+            <form action="{{ route('productos.index') }}" method="get" class="my-2 my-lg-0 mx-lg-3">
                 <div class="input-group input-group-sm border rounded-pill bg-light overflow-hidden"
-                    style="max-width: 600px;">
-                    <select class="form-select border-0 bg-transparent ps-3 pe-1 text-muted"
-                        style="max-width: 95px; font-size: 0.8rem;">
-                        <option value="">Todas</option>
-                        <option value="groceries">Abarrotes</option>
-                        <option value="drinks">Bebidas</option>
-                        <option value="chocolates">Chocolates</option>
-                    </select>
-                    <span class="border-end my-1"></span>
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none"
-                        placeholder="Buscar..." aria-label="Buscar" style="font-size: 0.8rem;">
+                    style="max-width: 300px;">
+                    <input type="text" name="q" value="{{ request('q') }}"
+                        class="form-control border-0 bg-transparent shadow-none ps-3"
+                        placeholder="Buscar productos, tiendas..." aria-label="Buscar" style="font-size: 0.8rem;">
                     <button class="btn border-0 text-primary pe-3" type="submit" aria-label="Buscar">
                         <i class="fa fa-search"></i>
                     </button>

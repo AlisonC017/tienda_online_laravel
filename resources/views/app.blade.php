@@ -4,11 +4,12 @@
 <head>
     <meta charset="utf-8">
     <title>CrikoStore</title>
+    <title>@yield('title', 'CrickoStore')</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @include('layouts.landing.css')
+    @stack('estilos')
 </head>
 
 <body>
@@ -34,6 +35,7 @@
 
     <!-- JavaScript-->
     @include('layouts.landing.scripts')
+    @stack('scripts')
     @yield('javascrip')
 </body>
 

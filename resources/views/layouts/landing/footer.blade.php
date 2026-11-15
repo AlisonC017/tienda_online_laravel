@@ -17,11 +17,17 @@
                  </div>
              </div>
              <div class="col-lg-3 col-md-8">
-                 <h4 class="text-light mb-4">Acceso Rápido</h4>
-                 <a class="btn btn-link" href="">Inicio</a>
-                 <a class="btn btn-link" href="">Productos</a>
-                 <a class="btn btn-link" href="">Tiendas</a>
+                 <h4 class="text-light mb-4">Acceso rápido</h4>
+                 <a class="btn btn-link" href="{{ route('home') }}">Inicio</a>
+                 <a class="btn btn-link" href="{{ route('productos.index') }}">Productos</a>
+                 <a class="btn btn-link" href="{{ route('tiendas.index') }}">Tiendas</a>
+                 <a class="btn btn-link" href="{{ route('carrito.index') }}">Carrito</a>
              </div>
+
+             <div class="col-lg-4 col-md-12">
+                <h4 class="text-light mb-4">¿Qué es CrickoStore?</h4>
+                <p>Un directorio comercial donde varias tiendas ofrecen sus productos y tú puedes armar un solo pedido con todas ellas.</p>
+            </div>
 
              <div class="col-lg-3 col-md-6">
                  <h4 class="text-light mb-4">Contacto</h4>
