@@ -38,46 +38,49 @@
 
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0 align-items-lg-center">
-            <a href="{{ route('inicio') }}" class="nav-item nav-link active">Inicio</a>
-            <a href="{{ route('productos.index') }}" class="nav-item nav-link">Productos</a>
-            <a href="{{ route('tiendas.index') }}" class="nav-item nav-link">Tiendas</a>
-            <a href="{{ route('contacto') }}" class="nav-item nav-link">Contacto</a>
+            <a href="{{ route('inicio') }}"
+                class="nav-item nav-link {{ request()->routeIs('inicio') ? 'active' : '' }}">Inicio
+                <a href="{{ route('productos.index') }}"
+                    class="nav-item nav-link {{ request()->routeIs('productos.*') ? 'active' : '' }}">Productos
+                    <a href="{{ route('tiendas.index') }}"
+                        class="nav-item nav-link {{ request()->routeIs('tiendas.*') ? 'active' : '' }}">Tiendas
+                        <a href="{{ route('contacto') }}"
+                            class="nav-item nav-link {{ request()->routeIs('contacto') ? 'active' : '' }}">Contacto
+                            <!-- Buscador  -->
+                            <form id="search-form" action="#" method="get" class="my-2 my-lg-0 me-lg-3">
+                                <div class="input-group input-group-sm border rounded-pill bg-light overflow-hidden"
+                                    style="max-width: 600px;">
+                                    <select class="form-select border-0 bg-transparent ps-3 pe-1 text-muted"
+                                        style="max-width: 95px; font-size: 0.8rem;">
+                                        <option value="">Todas</option>
+                                        <option value="groceries">Abarrotes</option>
+                                        <option value="drinks">Bebidas</option>
+                                        <option value="chocolates">Chocolates</option>
+                                    </select>
+                                    <span class="border-end my-1"></span>
+                                    <input type="text" class="form-control border-0 bg-transparent shadow-none"
+                                        placeholder="Buscar..." aria-label="Buscar" style="font-size: 0.8rem;">
+                                    <button class="btn border-0 text-primary pe-3" type="submit" aria-label="Buscar">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </form>
 
-            <!-- Buscador  -->
-            <form id="search-form" action="#" method="get" class="my-2 my-lg-0 me-lg-3">
-                <div class="input-group input-group-sm border rounded-pill bg-light overflow-hidden"
-                    style="max-width: 600px;">
-                    <select class="form-select border-0 bg-transparent ps-3 pe-1 text-muted"
-                        style="max-width: 95px; font-size: 0.8rem;">
-                        <option value="">Todas</option>
-                        <option value="groceries">Abarrotes</option>
-                        <option value="drinks">Bebidas</option>
-                        <option value="chocolates">Chocolates</option>
-                    </select>
-                    <span class="border-end my-1"></span>
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" placeholder="Buscar..."
-                        aria-label="Buscar" style="font-size: 0.8rem;">
-                    <button class="btn border-0 text-primary pe-3" type="submit" aria-label="Buscar">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </div>
-            </form>
+                            <!-- Carrito de Compras  -->
+                            <div class="cart text-end d-none d-lg-block">
+                                <button
+                                    class="btn border-0 bg-transparent d-inline-flex align-items-center gap-3 p-0 shadow-none text-start"
+                                    type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+                                    aria-controls="offcanvasCart">
+                                    <i class="fa fa-shopping-cart fs-3 text-primary"></i>
+                                    <div class="d-flex flex-column lh-sm">
+                                        <span class="fs-6 text-muted">Tu Carrito</span>
+                                        <span class="cart-total fs-5 fw-bold text-dark">$1,290.00</span>
+                                    </div>
+                                </button>
+                            </div>
 
-            <!-- Carrito de Compras  -->
-            <div class="cart text-end d-none d-lg-block">
-                <button
-                    class="btn border-0 bg-transparent d-inline-flex align-items-center gap-3 p-0 shadow-none text-start"
-                    type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                    aria-controls="offcanvasCart">
-                    <i class="fa fa-shopping-cart fs-3 text-primary"></i>
-                    <div class="d-flex flex-column lh-sm">
-                        <span class="fs-6 text-muted">Tu Carrito</span>
-                        <span class="cart-total fs-5 fw-bold text-dark">$1,290.00</span>
-                    </div>
-                </button>
-            </div>
-
-            @include('layouts.landing.carritoLateral')
+                            @include('layouts.landing.carritoLateral')
 
         </div>
 
