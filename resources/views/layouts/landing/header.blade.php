@@ -17,9 +17,12 @@
                 <small>+506 0000 0000 </small>
             </div>
             <div class="h-100 d-inline-flex align-items-center">
-                <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i class="fab fa-youtube"></i></a>
-                <a class="btn btn-sm-square bg-white text-primary me-0" href=""><i class="fab fa-instagram"></i></a>
+                <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i
+                        class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i
+                        class="fab fa-youtube"></i></a>
+                <a class="btn btn-sm-square bg-white text-primary me-0" href=""><i
+                        class="fab fa-instagram"></i></a>
             </div>
         </div>
     </div>
@@ -52,14 +55,14 @@
                     style="max-width: 600px;">
                     <select class="form-select border-0 bg-transparent ps-3 pe-1 text-muted"
                         style="max-width: 95px; font-size: 0.8rem;">
-                        <option value="">Todas</oprouteIs('inicio') ? 'active' : '' }}">Iniciotion>
+                        <option value="">Todas</oprouteIs('inicio') ? 'active' : '' }}">
                         <option value="groceries">Abarrotes</option>
                         <option value="drinks">Bebidas</option>
                         <option value="chocolates">Chocolates</option>
                     </select>
                     <span class="border-end my-1"></span>
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" placeholder="Buscar..."
-                        aria-label="Buscar" style="font-size: 0.8rem;">
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none"
+                        placeholder="Buscar..." aria-label="Buscar" style="font-size: 0.8rem;">
                     <button class="btn border-0 text-primary pe-3" type="submit" aria-label="Buscar">
                         <i class="fa fa-search"></i>
                     </button>

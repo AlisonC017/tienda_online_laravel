@@ -37,12 +37,13 @@
                 <div class="cl-login10__panel" role="tabpanel" id="cl-login10-panel-login"
                     aria-labelledby="cl-login10-tab-login" tabindex="0">
                     <form class="cl-login10__form" data-form="login" novalidate>
+                        @csrf
                         <h1 class="cl-login10__title">Bienvenido ❤️</h1>
                         <div class="cl-login10__field" data-field>
                             <label class="cl-login10__label" for="cl-login10-l-email">Correo</label>
                             <input class="cl-login10__input" id="cl-login10-l-email" name="email" type="email"
-                                autocomplete="username" required data-msg="Ingresa tú correo."
-                                aria-describedby="cl-login10-l-email-err">
+                                value="{{ old('email') }}" autocomplete="username" required
+                                data-msg="Ingresa tú correo." aria-describedby="cl-login10-l-email-err">
                             <p class="cl-login10__error" id="cl-login10-l-email-err" data-error></p>
                         </div>
                         <div class="cl-login10__field" data-field>
@@ -51,8 +52,8 @@
                             </div>
                             <div class="cl-login10__pw">
                                 <input class="cl-login10__input" id="cl-login10-l-pw" name="password" type="password"
-                                    autocomplete="current-password" required minlength="8"
-                                    data-msg="Enter your password." aria-describedby="cl-login10-l-pw-err">
+                                    autocomplete="current-password" required minlength="5"
+                                    data-msg="Ingresa tú contraseña" aria-describedby="cl-login10-l-pw-err">
                                 <button class="cl-login10__eye" type="button" aria-label="Show password"
                                     aria-pressed="false" aria-controls="cl-login10-l-pw" data-pw-toggle>
                                     <svg class="cl-login10__eye-on" viewBox="0 0 24 24" width="20" height="20"
@@ -73,11 +74,13 @@
                         </div>
                         <button class="cl-login10__submit" type="submit">Ingresar</button>
                         <p class="cl-login10__swap">O</p>
-                        <button class="cl-login10__submit" type="submit">Iniciar con Google</button>
+                        <button class="cl-login10__submit" type="button" onclick="">Iniciar con Google</button>
                         <p class="cl-login10__swap">¿No estas hasta la gaza?<button class="cl-login10__swap-btn"
                                 type="button" data-go="signup">Crea una cuenta</button></p>
                     </form>
                 </div>
+
+                {{-- FORM CREACION DE LA CUENTA / REGISTROOOOOOOOOOOOOOOOOOOOOO --}}
 
                 <div class="cl-login10__panel" role="tabpanel" id="cl-login10-panel-signup"
                     aria-labelledby="cl-login10-tab-signup" tabindex="0" hidden>
@@ -86,15 +89,15 @@
                         <div class="cl-login10__field" data-field>
                             <label class="cl-login10__label" for="cl-login10-s-name">Nombre</label>
                             <input class="cl-login10__input" id="cl-login10-s-name" name="name" type="text"
-                                autocomplete="name" required minlength="2" data-msg="¿Cómo te llamas?"
-                                aria-describedby="cl-login10-s-name-err">
+                                value="{{ old('name') }}" autocomplete="name" required minlength="2"
+                                data-msg="¿Cómo te llamas?" aria-describedby="cl-login10-s-name-err">
                             <p class="cl-login10__error" id="cl-login10-s-name-err" data-error></p>
                         </div>
                         <div class="cl-login10__field" data-field>
                             <label class="cl-login10__label" for="cl-login10-s-email">Correo</label>
                             <input class="cl-login10__input" id="cl-login10-s-email" name="email" type="email"
-                                autocomplete="email" required data-msg="Ingresa tú correo"
-                                aria-describedby="cl-login10-s-email-err">
+                                value="{{ old('email') }}" autocomplete="email" required
+                                data-msg="Ingresa tú correo" aria-describedby="cl-login10-s-email-err">
                             <p class="cl-login10__error" id="cl-login10-s-email-err" data-error></p>
                         </div>
                         <div class="cl-login10__field" data-field>
@@ -103,7 +106,7 @@
                                 <input class="cl-login10__input" id="cl-login10-s-pw" name="password"
                                     type="password" autocomplete="new-password" required minlength="5"
                                     pattern="(?=.*\d).{5,}" data-msg="Ingresa una contraseña"
-                                    data-pattern="Add at least one number."
+                                    data-pattern="Agrega al menos un número"
                                     aria-describedby="cl-login10-s-pw-hint cl-login10-s-pw-err">
                                 <button class="cl-login10__eye" type="button" aria-label="Show password"
                                     aria-pressed="false" aria-controls="cl-login10-s-pw" data-pw-toggle>
@@ -128,7 +131,7 @@
                         <div class="cl-login10__field" data-field>
                             <label class="cl-login10__check">
                                 <input type="checkbox" name="terms" required
-                                    data-msg="Please accept the terms to continue."
+                                    data-msg="Debes aceptar los términos para continuar"
                                     aria-describedby="cl-login10-s-terms-err">
                                 <span>Estoy de acuerdo con estar <a class="cl-login10__link" href="#">hasta la
                                         gaza</a> y <a class="cl-login10__link" href="#">Registrame en
@@ -138,7 +141,7 @@
                         </div>
                         <button class="cl-login10__submit" type="submit">Crear cuenta</button>
                         <p class="cl-login10__swap">O</p>
-                        <button class="cl-login10__submit" type="submit">Iniciar con Google</button>
+                        <button class="cl-login10__submit" type="button" onclick="">Iniciar con Google</button>
 
                         <p class="cl-login10__swap">¿Ya estabas hasta la gaza? <button class="cl-login10__swap-btn"
                                 type="button" data-go="login">Inicia Sesión</button></p>
