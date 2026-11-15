@@ -17,12 +17,9 @@
                 <small>+506 0000 0000 </small>
             </div>
             <div class="h-100 d-inline-flex align-items-center">
-                <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i
-                        class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i
-                        class="fab fa-youtube"></i></a>
-                <a class="btn btn-sm-square bg-white text-primary me-0" href=""><i
-                        class="fab fa-instagram"></i></a>
+                <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i class="fab fa-youtube"></i></a>
+                <a class="btn btn-sm-square bg-white text-primary me-0" href=""><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </div>
@@ -31,7 +28,7 @@
 
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
-    <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+    <a href="{{ route('inicio') }}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
         <h2 class="m-0 text-primary">CrikoStore</h2>
     </a>
 
@@ -41,10 +38,10 @@
 
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0 align-items-lg-center">
-            <a href="#" class="nav-item nav-link active">Inicio</a>
-            <a href="#" class="nav-item nav-link">Productos</a>
-            <a href="#" class="nav-item nav-link">Tiendas</a>
-            <a href="contact.html" class="nav-item nav-link">Contacto</a>
+            <a href="{{ route('inicio') }}" class="nav-item nav-link active">Inicio</a>
+            <a href="{{ route('productos.index') }}" class="nav-item nav-link">Productos</a>
+            <a href="{{ route('tiendas.index') }}" class="nav-item nav-link">Tiendas</a>
+            <a href="{{ route('contacto') }}" class="nav-item nav-link">Contacto</a>
 
             <!-- Buscador  -->
             <form id="search-form" action="#" method="get" class="my-2 my-lg-0 me-lg-3">
@@ -58,8 +55,8 @@
                         <option value="chocolates">Chocolates</option>
                     </select>
                     <span class="border-end my-1"></span>
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none"
-                        placeholder="Buscar..." aria-label="Buscar" style="font-size: 0.8rem;">
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none" placeholder="Buscar..."
+                        aria-label="Buscar" style="font-size: 0.8rem;">
                     <button class="btn border-0 text-primary pe-3" type="submit" aria-label="Buscar">
                         <i class="fa fa-search"></i>
                     </button>
