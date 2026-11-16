@@ -60,3 +60,17 @@ Route::middleware(['auth'])->group(function () {
     // CERRAR SESION
     Route::post('/logout', [ControllerAuth::class, 'logout'])->name('logout');
 });
+
+
+// RUTAS DEL MIDDLEWARE ALIIIII
+
+Route::middleware('guest')->group(function () {
+    Route::view('/login', 'login')->name('login');
+    Route::view('/registro', 'login', ['tab' => 'signup'])->name('register');
+
+    Route::post('/login', [ControllerAuth::class, 'login']);
+    Route::post('/registro', [ControllerAuth::class, 'register']);
+
+    Route::get('/auth/google', [ControllerAuth::class, 'redirectGoogle'])->name('google');
+    Route::get('/auth/google/callback', [ControllerAuth::class, 'callbackGoogle']);
+});

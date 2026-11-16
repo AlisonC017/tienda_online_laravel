@@ -2,19 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ControllerNavigation extends Controller
 {
-    public function dashboard()
+    public function landing()
     {
-        return auth()->user()->rol === 'administrador'
-            ? redirect()->route('admin.index')
-            : redirect()->route('tienda.index');
+        return view('modules.landing.index');
     }
 
     public function login()
     {
         return view('login');
+    }
+
+    public function register()
+    {
+        return view('login', ['tab' => 'signup']);
+    }
+
+    public function dashboard()
+    {
+        return Auth::user()->esAdmin()
+            ? redirect()->route('admin.index')
+            : redirect()->route('tienda.index');
+    }
+
+    public function adminDashboard()
+    {
+        return view('modules.admin.index');
+    }
+
+    public function tiendaDashboard()
+    {
+        return view('modules.tienda.index');
     }
 }

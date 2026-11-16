@@ -24,6 +24,16 @@ class User extends Authenticatable
         return $this->correo;
     }
 
+    public function esAdmin(): bool
+    {
+        return $this->rol === 'administrador';
+    }
+
+    public function esTienda(): bool
+    {
+        return $this->rol === 'tienda';
+    }
+
     public function imagen()
     {
         return $this->foto ?: asset('uploads/user.png');
