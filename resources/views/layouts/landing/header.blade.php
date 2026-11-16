@@ -32,8 +32,12 @@
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
     <a href="{{ route('inicio') }}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-        <h2 class="m-0 text-primary">CrikoStore</h2>
+        <img src="{{ asset('uploads/logo.png') }}" alt="Logo" class="navbar-brand" style="height: 140px;">
+        <h5 class=" text-primary" style="font-size: 13px; margin-left: -92px; padding-top: 52px; font-family: Satisfy;">
+            Compra 100% segura</h5>
     </a>
+
+
 
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>

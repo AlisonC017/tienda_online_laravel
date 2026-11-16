@@ -21,7 +21,10 @@
                         <circle cx="16" cy="22" r="2.4" fill="#fda4af" />
                     </svg>
                 </span>
-                <p class="cl-login10__brand">CrikoStore</p>
+
+                <a href="{{ route('inicio') }}" style="text-decoration:none; color:inherit;">
+                    <p class="cl-login10__brand">CrikoStore</p>
+                </a>
                 <p class="cl-login10__tagline">Hasta la Gaza</p>
             </header>
 
@@ -86,7 +89,7 @@
                         <button class="cl-login10__submit" type="submit">Ingresar</button>
                         <p class="cl-login10__swap">O</p>
                         <button class="cl-login10__submit" type="button"
-                            onclick="window.location='{{ route('google') }}">Iniciar con Google</button>
+                            onclick="window.location='{{ route('google') }}'">Iniciar con Google</button>
                         <p class="cl-login10__swap">¿No estas hasta la gaza?<button class="cl-login10__swap-btn"
                                 type="button" data-go="signup">Crea una cuenta</button></p>
                     </form>
@@ -164,7 +167,7 @@
                         <button class="cl-login10__submit" type="submit">Crear cuenta</button>
                         <p class="cl-login10__swap">O</p>
                         <button class="cl-login10__submit" type="button"
-                            onclick="window.location='{{ route('google') }}">Iniciar con Google</button>
+                            onclick="window.location='{{ route('google') }}'">Iniciar con Google</button>
 
                         <p class="cl-login10__swap">¿Ya estabas hasta la gaza? <button class="cl-login10__swap-btn"
                                 type="button" data-go="login">Inicia Sesión</button></p>

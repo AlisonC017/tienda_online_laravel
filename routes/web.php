@@ -64,7 +64,9 @@ Route::middleware(['auth'])->group(function () {
 
 // RUTAS DEL MIDDLEWARE ALIIIII
 
+
 Route::middleware('guest')->group(function () {
+
     Route::view('/login', 'login')->name('login');
     Route::view('/registro', 'login', ['tab' => 'signup'])->name('register');
 
