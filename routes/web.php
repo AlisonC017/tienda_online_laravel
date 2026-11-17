@@ -25,6 +25,10 @@ Route::get('/ti/{id}', function ($id) {
     return view('modules.landing.tiendas.show', compact('id'));
 })->name('tiendas.show');
 
+Route::post('/ti/{id}/contacto', function ($id) {
+    return redirect()->route('tiendas.show', $id)->with('ok', 'Mensaje enviado a la tienda.');
+})->name('tiendas.contacto');
+
 Route::get('/contacto', function () {
     return view('modules.landing.contacto');
 })->name('contacto');
@@ -50,13 +54,21 @@ Route::middleware(['auth'])->group(function () {
         })->name('index');
     });
 
-    // TIENDA
-    Route::middleware(['rol:tienda'])->prefix('tienda')->name('tienda.')->group(function () {
-        Route::get('/', function () {
-            return view('modules.tienda.index');
-        })->name('index');
-    });
 
+   // TIENDA
+Route::middleware(['rol:tienda'])->prefix('tienda')->name('tienda.')->group(function () {
+    Route::get('/', function () {
+        return view('modules.tienda.index');
+    })->name('index');
+
+    Route::get('/mi-tienda', function () {
+        return view('modules.tienda.mi-tienda');
+    })->name('mi-tienda');
+
+    Route::put('/mi-tienda', function () {
+        return redirect()->route('tienda.mi-tienda')->with('ok', 'Cambios guardados.');
+    })->name('mi-tienda.update');
+});
     // CERRAR SESION
     Route::post('/logout', [ControllerAuth::class, 'logout'])->name('logout');
 });
