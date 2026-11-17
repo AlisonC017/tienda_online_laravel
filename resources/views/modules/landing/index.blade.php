@@ -1,20 +1,5 @@
 @extends('app')
 
-@section('title', 'CrickoStore | Inicio')
-
-@push('estilos')
-    <style>
-        .slide-img { width: 100%; height: 520px; object-fit: cover; }
-        .slide-logo { width: 110px; height: 110px; object-fit: cover; border: 4px solid #fff; }
-        .card-producto img { height: 190px; object-fit: cover; }
-        .card-tienda .banner { height: 130px; object-fit: cover; width: 100%; }
-        .card-tienda .logo {
-            width: 80px; height: 80px; object-fit: cover; border: 4px solid #fff;
-            margin-top: -40px; background: #fff;
-        }
-    </style>
-@endpush
-
 @section('contenido')
     <!-- Carousel Start -->
     <div class="container-fluid p-0 pb-5">
