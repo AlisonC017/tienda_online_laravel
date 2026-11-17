@@ -621,3 +621,38 @@
 .footer .copyright a:hover {
     color: var(--primary);
 }
+
+
+.search-form {
+    max-width: 550px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 50px;
+    overflow: hidden;
+    border: 1px solid #e0d5c5;
+    padding: 5px;
+}
+
+.search-box .form-control {
+    border: none;
+    box-shadow: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+}
+
+.search-box button {
+    background-color: #594331;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 25px;
+    white-space: nowrap;
+}
+
+.search-box button:hover {
+    background-color: #80664f;
+}

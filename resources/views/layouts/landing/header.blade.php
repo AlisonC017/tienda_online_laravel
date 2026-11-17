@@ -35,6 +35,8 @@
         <h2 class="m-0 text-primary">CrikoStore</h2>
     </a>
 
+
+
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -81,7 +83,7 @@
         </div>
 
         <!--  Get A Quote  -->
-        <a href="" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block rounded-0 ms-4">
+        <a href="{{ route('login') }}" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block rounded-0 ms-4">
             Iniciar Sesión<i class="fa fa-arrow-right ms-3"></i>
         </a>
     </div>
