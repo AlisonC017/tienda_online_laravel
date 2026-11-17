@@ -18,10 +18,10 @@
              </div>
              <div class="col-lg-3 col-md-8">
                  <h4 class="text-light mb-4">Acceso rápido</h4>
-                 <a class="btn btn-link" href="{{ route('home') }}">Inicio</a>
+                 <a class="btn btn-link" href="{{ route('inicio') }}">Inicio</a>
                  <a class="btn btn-link" href="{{ route('productos.index') }}">Productos</a>
                  <a class="btn btn-link" href="{{ route('tiendas.index') }}">Tiendas</a>
-                 <a class="btn btn-link" href="{{ route('carrito.index') }}">Carrito</a>
+                 <a class="btn btn-link" href="#">Carrito</a>
              </div>
 
              <div class="col-lg-4 col-md-12">
@@ -48,8 +48,7 @@
                      &copy; <a class="border-bottom" href="#">Grupo #3 - UCR</a> | Todos los derechos reservados.
                  </div>
                  <div class="col-md-6 text-center text-md-end">
-                     <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                     Designed By <a class="border-bottom" href="https://htmlcodex.com">Ali XD</a>
+                     Designed By <a class="border-bottom" href="#">Ali XD</a>
                  </div>
              </div>
          </div>
