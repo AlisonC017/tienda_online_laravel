@@ -1,5 +1,7 @@
 @extends('appAdmin')
 
+@section('tittle', 'Admin')
+
 @section('titulo', 'Administración')
 
 @section('subtitulo', 'Resumen')

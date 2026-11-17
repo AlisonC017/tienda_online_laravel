@@ -21,10 +21,14 @@
                         <circle cx="16" cy="22" r="2.4" fill="#fda4af" />
                     </svg>
                 </span>
-                <p class="cl-login10__brand">CrikoStore</p>
+
+                <a href="{{ route('inicio') }}" style="text-decoration:none; color:inherit;">
+                    <p class="cl-login10__brand">CrikoStore</p>
+                </a>
                 <p class="cl-login10__tagline">Hasta la Gaza</p>
             </header>
 
+            {{-- Cejilla de botones --}}
             <div class="cl-login10__tabs" role="tablist" aria-label="Log in or create an account" data-tablist>
                 <span class="cl-login10__thumb" aria-hidden="true"></span>
                 <button class="cl-login10__tab" type="button" role="tab" id="cl-login10-tab-login"
@@ -33,16 +37,20 @@
                     aria-controls="cl-login10-panel-signup" aria-selected="false" tabindex="-1">Crear cuenta</button>
             </div>
 
+
             <div class="cl-login10__panels">
                 <div class="cl-login10__panel" role="tabpanel" id="cl-login10-panel-login"
                     aria-labelledby="cl-login10-tab-login" tabindex="0">
-                    <form class="cl-login10__form" data-form="login" novalidate>
+                    {{-- FORM INICIAR SESION --}}
+                    <form class="cl-login10__form" data-form="login" method="POST" action="{{ route('login') }}"
+                        novalidate>
+                        @csrf
                         <h1 class="cl-login10__title">Bienvenido ❤️</h1>
                         <div class="cl-login10__field" data-field>
                             <label class="cl-login10__label" for="cl-login10-l-email">Correo</label>
-                            <input class="cl-login10__input" id="cl-login10-l-email" name="email" type="email"
-                                autocomplete="username" required data-msg="Ingresa tú correo."
-                                aria-describedby="cl-login10-l-email-err">
+                            <input class="cl-login10__input" id="cl-login10-l-email" name="correo" type="email"
+                                value="{{ old('correo') }}" autocomplete="username" required
+                                data-msg="Ingresa tú correo." aria-describedby="cl-login10-l-email-err">
                             <p class="cl-login10__error" id="cl-login10-l-email-err" data-error></p>
                         </div>
                         <div class="cl-login10__field" data-field>
@@ -51,8 +59,8 @@
                             </div>
                             <div class="cl-login10__pw">
                                 <input class="cl-login10__input" id="cl-login10-l-pw" name="password" type="password"
-                                    autocomplete="current-password" required minlength="8"
-                                    data-msg="Enter your password." aria-describedby="cl-login10-l-pw-err">
+                                    autocomplete="current-password" required minlength="5"
+                                    data-msg="Ingresa tú contraseña" aria-describedby="cl-login10-l-pw-err">
                                 <button class="cl-login10__eye" type="button" aria-label="Show password"
                                     aria-pressed="false" aria-controls="cl-login10-l-pw" data-pw-toggle>
                                     <svg class="cl-login10__eye-on" viewBox="0 0 24 24" width="20" height="20"
@@ -61,8 +69,8 @@
                                         <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z" />
                                         <circle cx="12" cy="12" r="3" />
                                     </svg>
-                                    <svg class="cl-login10__eye-off" viewBox="0 0 24 24" width="20" height="20"
-                                        fill="none" stroke="currentColor" stroke-width="1.8"
+                                    <svg class="cl-login10__eye-off" viewBox="0 0 24 24" width="20"
+                                        height="20" fill="none" stroke="currentColor" stroke-width="1.8"
                                         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                         <path
                                             d="M3 3l18 18M10.6 5.1A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.1M6.6 6.6C3.9 8.3 2 12 2 12s3.6 7 10 7a9.8 9.8 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2" />
@@ -71,30 +79,43 @@
                             </div>
                             <p class="cl-login10__error" id="cl-login10-l-pw-err" data-error></p>
                         </div>
+                        @if ($errors->any())
+                            <div style="color:#e11d48; font-size:.9rem; margin-bottom:.75rem;">
+                                @foreach ($errors->all() as $error)
+                                    <p>{{ $error }}</p>
+                                @endforeach
+                            </div>
+                        @endif
                         <button class="cl-login10__submit" type="submit">Ingresar</button>
                         <p class="cl-login10__swap">O</p>
-                        <button class="cl-login10__submit" type="submit">Iniciar con Google</button>
+                        <button class="cl-login10__submit" type="button"
+                            onclick="window.location='{{ route('google') }}'">Iniciar con Google</button>
                         <p class="cl-login10__swap">¿No estas hasta la gaza?<button class="cl-login10__swap-btn"
                                 type="button" data-go="signup">Crea una cuenta</button></p>
                     </form>
                 </div>
 
+                {{-- FORM CREACION DE LA CUENTA / REGISTROOOOOOOOOOOOOOOOOOOOOO --}}
+
                 <div class="cl-login10__panel" role="tabpanel" id="cl-login10-panel-signup"
                     aria-labelledby="cl-login10-tab-signup" tabindex="0" hidden>
-                    <form class="cl-login10__form" data-form="signup" novalidate>
+                    <form class="cl-login10__form" data-form="signup" method="POST"
+                        action="{{ route('register') }}" novalidate>
+                        @csrf
+                        <input type="hidden" name="form_type" value="signup">
                         <h2 class="cl-login10__title">Empieza en CrikoStore</h2>
                         <div class="cl-login10__field" data-field>
                             <label class="cl-login10__label" for="cl-login10-s-name">Nombre</label>
-                            <input class="cl-login10__input" id="cl-login10-s-name" name="name" type="text"
-                                autocomplete="name" required minlength="2" data-msg="¿Cómo te llamas?"
-                                aria-describedby="cl-login10-s-name-err">
+                            <input class="cl-login10__input" id="cl-login10-s-name" name="nombre" type="text"
+                                value="{{ old('nombre') }}" autocomplete="name" required minlength="2"
+                                data-msg="¿Cómo te llamas?" aria-describedby="cl-login10-s-name-err">
                             <p class="cl-login10__error" id="cl-login10-s-name-err" data-error></p>
                         </div>
                         <div class="cl-login10__field" data-field>
                             <label class="cl-login10__label" for="cl-login10-s-email">Correo</label>
-                            <input class="cl-login10__input" id="cl-login10-s-email" name="email" type="email"
-                                autocomplete="email" required data-msg="Ingresa tú correo"
-                                aria-describedby="cl-login10-s-email-err">
+                            <input class="cl-login10__input" id="cl-login10-s-email" name="correo" type="email"
+                                value="{{ old('correo') }}" autocomplete="email" required
+                                data-msg="Ingresa tú correo" aria-describedby="cl-login10-s-email-err">
                             <p class="cl-login10__error" id="cl-login10-s-email-err" data-error></p>
                         </div>
                         <div class="cl-login10__field" data-field>
@@ -103,7 +124,7 @@
                                 <input class="cl-login10__input" id="cl-login10-s-pw" name="password"
                                     type="password" autocomplete="new-password" required minlength="5"
                                     pattern="(?=.*\d).{5,}" data-msg="Ingresa una contraseña"
-                                    data-pattern="Add at least one number."
+                                    data-pattern="Agrega al menos un número"
                                     aria-describedby="cl-login10-s-pw-hint cl-login10-s-pw-err">
                                 <button class="cl-login10__eye" type="button" aria-label="Show password"
                                     aria-pressed="false" aria-controls="cl-login10-s-pw" data-pw-toggle>
@@ -128,7 +149,7 @@
                         <div class="cl-login10__field" data-field>
                             <label class="cl-login10__check">
                                 <input type="checkbox" name="terms" required
-                                    data-msg="Please accept the terms to continue."
+                                    data-msg="Debes aceptar los términos para continuar"
                                     aria-describedby="cl-login10-s-terms-err">
                                 <span>Estoy de acuerdo con estar <a class="cl-login10__link" href="#">hasta la
                                         gaza</a> y <a class="cl-login10__link" href="#">Registrame en
@@ -136,9 +157,17 @@
                             </label>
                             <p class="cl-login10__error" id="cl-login10-s-terms-err" data-error></p>
                         </div>
+                        @if ($errors->any())
+                            <div style="color:#e11d48; font-size:.9rem; margin-bottom:.75rem;">
+                                @foreach ($errors->all() as $error)
+                                    <p>{{ $error }}</p>
+                                @endforeach
+                            </div>
+                        @endif
                         <button class="cl-login10__submit" type="submit">Crear cuenta</button>
                         <p class="cl-login10__swap">O</p>
-                        <button class="cl-login10__submit" type="submit">Iniciar con Google</button>
+                        <button class="cl-login10__submit" type="button"
+                            onclick="window.location='{{ route('google') }}'">Iniciar con Google</button>
 
                         <p class="cl-login10__swap">¿Ya estabas hasta la gaza? <button class="cl-login10__swap-btn"
                                 type="button" data-go="login">Inicia Sesión</button></p>
@@ -160,6 +189,14 @@
         </section>
     </main>
     <script src="{{ asset('themes/login/js/snippet.js') }}"></script>
+
+    @if (($tab ?? null) === 'signup' || old('form_type') === 'signup')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('cl-login10-tab-signup').click();
+            });
+        </script>
+    @endif
 </body>
 
 </html>
