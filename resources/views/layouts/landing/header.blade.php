@@ -82,7 +82,7 @@
                     <i class="fa fa-shopping-cart fs-3 text-primary"></i>
                     <div class="d-flex flex-column lh-sm">
                         <span class="fs-6 text-muted">Tu Carrito</span>
-                        <span class="cart-total fs-5 fw-bold text-dark">$1,290.00</span>
+                        <span class="cart-total fs-5 fw-bold text-dark">₡{{ number_format($carritoTotal, 0,',','.') }}</span>
                     </div>
                 </button>
             </div>

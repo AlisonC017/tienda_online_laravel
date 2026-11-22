@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\PedidoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControllerNavigation;
 use App\Http\Controllers\ControllerAuth;
@@ -24,6 +26,10 @@ Route::get('/ti', function () {
 Route::get('/ti/{id}', function ($id) {
     return view('modules.landing.tiendas.show', compact('id'));
 })->name('tiendas.show');
+
+Route::post('/ti/{id}/contacto', function ($id) {
+    return redirect()->route('tiendas.show', $id)->with('ok', 'Mensaje enviado a la tienda.');
+})->name('tiendas.contacto');
 
 Route::get('/contacto', function () {
     return view('modules.landing.contacto');
@@ -50,13 +56,21 @@ Route::middleware(['auth'])->group(function () {
         })->name('index');
     });
 
+
     // TIENDA
     Route::middleware(['rol:tienda'])->prefix('tienda')->name('tienda.')->group(function () {
         Route::get('/', function () {
             return view('modules.tienda.index');
         })->name('index');
-    });
 
+        Route::get('/mi-tienda', function () {
+            return view('modules.tienda.mi-tienda');
+        })->name('mi-tienda');
+
+        Route::put('/mi-tienda', function () {
+            return redirect()->route('tienda.mi-tienda')->with('ok', 'Cambios guardados.');
+        })->name('mi-tienda.update');
+    });
     // CERRAR SESION
     Route::post('/logout', [ControllerAuth::class, 'logout'])->name('logout');
 });
@@ -76,3 +90,31 @@ Route::middleware('guest')->group(function () {
     Route::get('/auth/google', [ControllerAuth::class, 'redirectGoogle'])->name('google');
     Route::get('/auth/google/callback', [ControllerAuth::class, 'callbackGoogle']);
 });
+
+// RUTAS CARRITO
+
+Route::resource('carrito', CarritoController::class)
+    ->only(['index', 'store', 'update', 'destroy']);
+    Route::get('/checkout', [PedidoController::class, 'create'])->name('checkout');
+Route::post('/checkout', [PedidoController::class, 'store'])->name('pedido.store');
+
+
+
+
+/* -- SOLO PRUEBA DE MAILTRAP --
+Route::get('/test-correo-enviar', function () {
+    $pedido = new App\Models\Pedido([
+        'fecha' => now(), 'cliente' => 'María López', 'correo' => 'maria@mail.com',
+        'telefono' => '8888-8888', 'total' => 75000, 'estado' => 'En preparación',
+    ]);
+    $pedido->id_pedido = 105;
+    $pedido->setRelation('detalles', collect([
+        new App\Models\Detalle(['nombre_producto' => 'Producto A', 'nombre_tienda' => 'Tienda Verde', 'cantidad' => 1, 'subtotal' => 25000]),
+        new App\Models\Detalle(['nombre_producto' => 'Producto B', 'nombre_tienda' => 'Mundo Tech', 'cantidad' => 2, 'subtotal' => 50000]),
+    ]));
+
+    \Illuminate\Support\Facades\Mail::to($pedido->correo)->send(new App\Mail\PedidoConfirmado($pedido));
+
+    return 'Correo enviado, revisa Mailtrap';
+});
+*/
