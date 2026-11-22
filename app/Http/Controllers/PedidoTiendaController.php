@@ -24,19 +24,17 @@ class PedidoTiendaController extends Controller
             $query->where('id_tienda', $tienda->id_tienda);
         }])->orderByDesc('fecha')->get();
 
-        return view('pedidos-tienda.index', compact('pedidos'));
+        return view('modules.tienda.pedidos.index', compact('pedidos'));
     }
 
     public function show(Pedido $pedido)
     {
         $tienda = $this->tiendaActual();
-
         $detalles = $pedido->detalles()->where('id_tienda', $tienda->id_tienda)->get();
 
         // Verificar que el pedido tenga productos de esta tienda
         abort_if($detalles->isEmpty(), 403);
-
-        return view('pedidos-tienda.show', compact('pedido', 'detalles'));
+        return view('modules.tienda.pedidos.show', compact('pedido', 'detalles'));
     }
 
     public function marcarListo(Detalle $detalle)

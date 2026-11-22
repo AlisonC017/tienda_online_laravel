@@ -16,13 +16,13 @@ class ProductoController extends Controller
     {
         $tienda = $this->tiendaActual();
         $productos = Producto::where('id_tienda', $tienda->id_tienda)->with('categorias')->orderByDesc('id_producto')->get();
-        return view('productos.index', compact('productos'));
+        return view('modules.tienda.productos.index', compact('productos'));
     }
 
     public function create()
     {
         $categorias = Categoria::orderBy('nombre')->get();
-        return view('productos.create', compact('categorias'));
+        return view('modules.tienda.productos.create', compact('categorias'));
     }
 
     public function store(Request $request)
@@ -46,7 +46,7 @@ class ProductoController extends Controller
                 'imagen' => $this->guardarArchivo($archivo),
             ]);
         }
-        return redirect()->route('productos.index')->with('success', 'Producto registrado correctamente.');
+        return redirect()->route('tienda.productos.index')->with('success', 'Producto registrado correctamente.');
     }
 
     public function edit(Producto $producto)
@@ -54,7 +54,7 @@ class ProductoController extends Controller
         $this->verificarDueno($producto);
         $categorias = Categoria::orderBy('nombre')->get();
         $producto->load('categorias', 'imagenes');
-        return view('productos.edit', compact('producto', 'categorias'));
+        return view('modules.tienda.productos.edit', compact('producto', 'categorias'));
     }
 
     public function update(Request $request, Producto $producto)
@@ -93,7 +93,7 @@ class ProductoController extends Controller
                 'imagen' => $this->guardarArchivo($archivo),
             ]);
         }
-        return redirect()->route('productos.index')->with('success', 'Producto actualizado correctamente.');
+        return redirect()->route('tienda.productos.index')->with('success', 'Producto actualizado correctamente.');
     }
 
     public function cambiarEstado(Producto $producto)
@@ -137,7 +137,7 @@ class ProductoController extends Controller
             'descripcion'         => 'required|string|max:255',
             'precio'              => 'required|numeric|min:0',
             'imagen'              => ($esCreacion ? 'required' : 'nullable') . '|image|max:2048',
-            'galeria'             => 'nullable|array',
+            'galeria'             => 'nullable|array|max:' . self::MAX_GALERIA,
             'galeria.*'           => 'image|max:2048',
             'eliminar_imagenes'   => 'nullable|array',
             'eliminar_imagenes.*' => 'integer',

@@ -8,17 +8,14 @@ class PedidoAdminController extends Controller
 {
     public function index()
     {
-        $pedidos = Pedido::with('detalles')
-            ->orderByDesc('fecha')
-            ->get();
-
-        return view('pedidos-admin.index', compact('pedidos'));
+        $pedidos = Pedido::with('detalles')->orderByDesc('fecha')->get();
+        return view('modules.admin.pedidos.index', compact('pedidos'));
     }
 
     public function show(Pedido $pedido)
     {
         $pedido->load('detalles');
-        return view('pedidos-admin.show', compact('pedido'));
+        return view('modules.admin.pedidos.show', compact('pedido'));
     }
 
     public function entregar(Pedido $pedido)

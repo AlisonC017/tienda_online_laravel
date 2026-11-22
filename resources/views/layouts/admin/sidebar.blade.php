@@ -33,7 +33,7 @@
 
                 <!-- Pedidos -->
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="{{ route('admin.pedidos.index') }}">
                         <i class="fas fa-shopping-bag"></i>
                         <p>Pedidos</p>
                     </a>
