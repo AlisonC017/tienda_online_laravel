@@ -3,7 +3,8 @@
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="dark">
             <a href="{{ route('tienda.index') }}" class="logo">
-                <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand" height="20" />
+                <img src="{{ asset('uploads/logo.png') }}" alt="navbar brand" class="navbar-brand"
+                    style="height: 118px; width: auto; max-height: none; margin-left:-19px; background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.164) 0%, rgba(255, 255, 255, 0) 72%);" />
             </a>
             <div class="nav-toggle">
                 <button class="btn btn-toggle toggle-sidebar">
@@ -74,7 +75,8 @@
                 </li>
 
                 <li class="nav-item topbar-user dropdown hidden-caret">
-                    <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
+                    <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#"
+                        aria-expanded="false">
                         <div class="avatar-sm">
                             <img src="assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle" />
                         </div>

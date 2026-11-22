@@ -17,9 +17,12 @@
                 <small>+506 0000 0000 </small>
             </div>
             <div class="h-100 d-inline-flex align-items-center">
-                <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i class="fab fa-youtube"></i></a>
-                <a class="btn btn-sm-square bg-white text-primary me-0" href=""><i class="fab fa-instagram"></i></a>
+                <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i
+                        class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i
+                        class="fab fa-youtube"></i></a>
+                <a class="btn btn-sm-square bg-white text-primary me-0" href=""><i
+                        class="fab fa-instagram"></i></a>
             </div>
         </div>
     </div>
@@ -29,8 +32,12 @@
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
     <a href="{{ route('inicio') }}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-        <h2 class="m-0 text-primary">CrikoStore</h2>
+        <img src="{{ asset('uploads/logo.png') }}" alt="Logo" class="navbar-brand" style="height: 140px;">
+        <h5 class=" text-primary" style="font-size: 13px; margin-left: -92px; padding-top: 52px; font-family: Satisfy;">
+            Compra 100% segura</h5>
     </a>
+
+
 
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
@@ -52,14 +59,14 @@
                     style="max-width: 600px;">
                     <select class="form-select border-0 bg-transparent ps-3 pe-1 text-muted"
                         style="max-width: 95px; font-size: 0.8rem;">
-                        <option value="">Todas</oprouteIs('inicio') ? 'active' : '' }}">Iniciotion>
+                        <option value="">Todas</oprouteIs('inicio') ? 'active' : '' }}">
                         <option value="groceries">Abarrotes</option>
                         <option value="drinks">Bebidas</option>
                         <option value="chocolates">Chocolates</option>
                     </select>
                     <span class="border-end my-1"></span>
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none" placeholder="Buscar..."
-                        aria-label="Buscar" style="font-size: 0.8rem;">
+                    <input type="text" class="form-control border-0 bg-transparent shadow-none"
+                        placeholder="Buscar..." aria-label="Buscar" style="font-size: 0.8rem;">
                     <button class="btn border-0 text-primary pe-3" type="submit" aria-label="Buscar">
                         <i class="fa fa-search"></i>
                     </button>
@@ -75,7 +82,7 @@
                     <i class="fa fa-shopping-cart fs-3 text-primary"></i>
                     <div class="d-flex flex-column lh-sm">
                         <span class="fs-6 text-muted">Tu Carrito</span>
-                        <span class="cart-total fs-5 fw-bold text-dark">$1,290.00</span>
+                        <span class="cart-total fs-5 fw-bold text-dark">₡{{ number_format($carritoTotal, 0,',','.') }}</span>
                     </div>
                 </button>
             </div>

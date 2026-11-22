@@ -21,3 +21,6 @@
 
 <!-- Template Stylesheet -->
 <link href="{{ asset('themes/landing/css/style.css') }}" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Pacifico&family=Satisfy&display=swap"
+    rel="stylesheet">

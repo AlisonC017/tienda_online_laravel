@@ -1,83 +1,59 @@
 @extends('app')
+@section('title', 'Detalle del producto')
 
 @section('contenido')
-    <div class="container-xxl py-5">
-        <div class="container">
+<div class="container py-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('productos.index') }}">Productos</a></li>
+            <li class="breadcrumb-item active">Audífonos Bluetooth</li>
+        </ol>
+    </nav>
 
-            <div class="container my-5">
-
-                <!-- Breadcrumb -->
-                <nav class="mb-4">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">Inicio</li>
-                        <li class="breadcrumb-item">Productos</li>
-                        <li class="breadcrumb-item active">
-                            Nombre del producto
-                        </li>
-                    </ol>
-                </nav>
-
-                <div class="row g-4">
-
-                    <!-- Galería de imágenes -->
-                    <div class="col-md-6">
-                        <img src="https://placehold.co/600x600" class="img-fluid rounded w-100" alt="Producto">
-
-                        <div class="row g-2 mt-1">
-                            @for ($i = 0; $i < 4; $i++)
-                                <div class="col-3">
-                                    <img src="https://placehold.co/150x150" class="img-fluid rounded"
-                                        alt="Vista del producto">
-                                </div>
-                            @endfor
-                        </div>
+    <div class="row g-4">
+        <div class="col-md-6">
+            <img id="imgPrincipal" src="https://placehold.co/600x600?text=Principal" class="img-fluid rounded mb-2" alt="Producto">
+            <div class="row g-2">
+                @foreach (['Galería 1', 'Galería 2', 'Galería 3', 'Galería 4'] as $g)
+                    <div class="col-3">
+                        <img src="https://placehold.co/150x150?text={{ urlencode($g) }}" class="img-thumbnail" style="cursor:pointer"
+                             onclick="document.getElementById('imgPrincipal').src = this.src.replace('150x150', '600x600')" alt="{{ $g }}">
                     </div>
+                @endforeach
+            </div>
+        </div>
 
-                    <!-- Información del producto -->
-                    <div class="col-md-6">
+        <div class="col-md-6">
+            <h3 class="fw-bold">Audífonos Bluetooth</h3>
+            <p class="text-muted">Tienda: <a href="{{ route('tiendas.show', 2) }}">Mundo Tech</a></p>
+            <h4 class="fw-bold mb-3">₡25.000</h4>
 
-                        <h2>Nombre del producto</h2>
-
-                        <p>
-                            Tienda de ejemplo
-                            <a href="#">Ver tienda</a>
-                        </p>
-
-                        <h3 class="fw-bold">₡25.000</h3>
-
-                        <label class="form-label mt-3">Cantidad:</label>
-
-                        <div class="input-group mb-3" style="max-width: 150px;">
-                            <button class="btn btn-outline-secondary">−</button>
-                            <input type="number" class="form-control text-center" value="1" min="1">
-                            <button class="btn btn-outline-secondary">+</button>
-                        </div>
-
-                        <button class="btn btn-dark w-100 mb-4"> Agregar al carrito </button>
-
-                        <h5>Descripción del producto</h5>
-                        <p class="text-secondary">
-                            Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit. Sed do eiusmod tempor.
-                        </p>
-
-                        <h5>Categorías</h5>
-
-                        <span class="badge rounded-pill bg-light text-dark">
-                            Tecnología
-                        </span>
-
-                        <span class="badge rounded-pill bg-light text-dark">
-                            Accesorios
-                        </span>
-
-                    </div>
-                </div>
+            <label class="form-label">Cantidad</label>
+            <div class="input-group mb-3" style="max-width:150px">
+                <button class="btn btn-outline-secondary" type="button" onclick="cambiar(-1)">−</button>
+                <input type="text" id="cantidad" class="form-control text-center" value="1" readonly>
+                <button class="btn btn-outline-secondary" type="button" onclick="cambiar(1)">+</button>
             </div>
 
+            <a href="{{ url('/carrito') }}" class="btn btn-dark w-100 mb-4">Agregar al carrito</a>
+
+            <h6 class="fw-bold">Descripción del producto</h6>
+            <p>Audífonos inalámbricos con cancelación de ruido, hasta 30 horas de batería y micrófono integrado.</p>
+
+            <h6 class="fw-bold">Categorías</h6>
+            <span class="badge rounded-pill bg-light text-dark border">Tecnología</span>
+            <span class="badge rounded-pill bg-light text-dark border">Accesorios</span>
         </div>
     </div>
+</div>
 @endsection
 
 @section('javascrip')
+<script>
+    function cambiar(n) {
+        const i = document.getElementById('cantidad');
+        i.value = Math.max(1, parseInt(i.value) + n);
+    }
+</script>
 @endsection
