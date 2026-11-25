@@ -80,7 +80,7 @@
                     <a href="/p" class="btn btn-outline-secondary">← Seguir comprando</a>
                     <div class="text-end">
                         <h4>Total: ₡{{ number_format($total, 0, ',', '.') }}</h4>
-                        <a href="#" class="btn btn-primary">Finalizar pedido</a>
+                        <a href="{{ route('checkout') }}" class="btn btn-primary">Finalizar pedido</a>
                     </div>
                 </div>
             @endif

@@ -10,6 +10,7 @@ use App\Http\Controllers\PedidoTiendaController;
 use App\Http\Controllers\PedidoAdminController;
 use App\Http\Controllers\AdminTiendaController;
 
+
 // PUBLICO
 Route::get('/', [ControllerNavigation::class, 'landing'])->name('inicio');
 
