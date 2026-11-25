@@ -26,7 +26,7 @@
 
                 <!-- Tiendas -->
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="{{ route('admin.tiendas.index') }}">
                         <i class="fas fa-store"></i>
                         <p>Tiendas</p>
                     </a>

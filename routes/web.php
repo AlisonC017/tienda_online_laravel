@@ -8,11 +8,10 @@ use App\Http\Controllers\ControllerAuth;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\PedidoTiendaController;
 use App\Http\Controllers\PedidoAdminController;
+use App\Http\Controllers\AdminTiendaController;
 
 // PUBLICO
-Route::get('/', function () {
-    return view('modules.landing.index');
-})->name('inicio');
+Route::get('/', [ControllerNavigation::class, 'landing'])->name('inicio');
 
 Route::get('/p', function () {
     return view('modules.landing.productos.index');
@@ -49,14 +48,18 @@ Route::get('/auth/google/callback', [ControllerAuth::class, 'handleGoogleCallbac
 
 // RUTAS PROTEGIDAS
 Route::middleware(['auth'])->group(function () {
-
     Route::get('/dashboard', [ControllerNavigation::class, 'dashboard'])->name('dashboard');
 
     // ADMINISTRADOR
     Route::middleware(['rol:administrador'])->prefix('admin')->name('admin.')->group(function () {
         Route::get('/', function () {
-            return view('modules.admin.index');
+            return redirect()->route('admin.pedidos.index');
         })->name('index');
+
+        // TIENDAS
+        Route::get('/tiendas', [AdminTiendaController::class, 'index'])->name('tiendas.index');
+        Route::patch('/tiendas/{tienda}/activa', [AdminTiendaController::class, 'toggleActiva'])->name('tiendas.activa');
+        Route::patch('/tiendas/{tienda}/destacada', [AdminTiendaController::class, 'toggleDestacada'])->name('tiendas.destacada');
     });
 
 
