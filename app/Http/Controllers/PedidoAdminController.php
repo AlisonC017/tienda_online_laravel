@@ -30,6 +30,6 @@ class PedidoAdminController extends Controller
 
         $pedido->estado = 'Entregado';
         $pedido->save();
-        return redirect()->route('pedidos-admin.show', $pedido)->with('success', 'Pedido marcado como entregado correctamente.');
+        return redirect()->route('admin.pedidos.show', $pedido)->with('success', 'Pedido marcado como entregado correctamente.');
     }
 }
