@@ -1,28 +1,37 @@
 <!-- Topbar Start -->
-<div class="container-fluid bg-light p-0">
-    <div class="row gx-0 d-none d-lg-flex">
-        <div class="col-lg-7 px-5 text-start">
-            <div class="h-100 d-inline-flex align-items-center py-3 me-4">
-                <small class="fa fa-map-marker-alt text-primary me-2"></small>
+<div @class(['container-fluid', 'bg-light', 'p-0'])>
+    <div @class(['row', 'gx-0', 'd-none', 'd-lg-flex'])>
+        <div @class(['col-lg-7', 'px-5', 'text-start'])>
+            <div @class([
+                'h-100',
+                'd-inline-flex',
+                'align-items-center',
+                'py-3',
+                'me-4',
+            ])>
+                <small @class(['fa', 'fa-map-marker-alt', 'text-primary', 'me-2'])></small>
                 <small>Siquirres, Limón, Costa Rica</small>
             </div>
-            <div class="h-100 d-inline-flex align-items-center py-3">
-                <small class="far fa-clock text-primary me-2"></small>
+            <div @class(['h-100', 'd-inline-flex', 'align-items-center', 'py-3'])>
+                <small @class(['far', 'fa-clock', 'text-primary', 'me-2'])></small>
                 <small>Lunes - Sábado : 09.00 AM - 10.00 PM</small>
             </div>
         </div>
-        <div class="col-lg-5 px-5 text-end">
-            <div class="h-100 d-inline-flex align-items-center py-3 me-4">
-                <small class="fa fa-phone-alt text-primary me-2"></small>
+        <div @class(['col-lg-5', 'px-5', 'text-end'])>
+            <div @class([
+                'h-100',
+                'd-inline-flex',
+                'align-items-center',
+                'py-3',
+                'me-4',
+            ])>
+                <small @class(['fa', 'fa-phone-alt', 'text-primary', 'me-2'])></small>
                 <small>+506 0000 0000 </small>
             </div>
-            <div class="h-100 d-inline-flex align-items-center">
-                <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i
-                        class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i
-                        class="fab fa-youtube"></i></a>
-                <a class="btn btn-sm-square bg-white text-primary me-0" href=""><i
-                        class="fab fa-instagram"></i></a>
+            <div @class(['h-100', 'd-inline-flex', 'align-items-center'])>
+                <a @class(['btn', 'btn-sm-square', 'bg-white', 'text-primary', 'me-1']) href=""><i @class(['fab', 'fa-facebook-f'])></i></a>
+                <a @class(['btn', 'btn-sm-square', 'bg-white', 'text-primary', 'me-1']) href=""><i @class(['fab', 'fa-youtube'])></i></a>
+                <a @class(['btn', 'btn-sm-square', 'bg-white', 'text-primary', 'me-0']) href=""><i @class(['fab', 'fa-instagram'])></i></a>
             </div>
         </div>
     </div>
@@ -30,59 +39,123 @@
 <!-- Topbar End -->
 
 <!-- Navbar Start -->
-<nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
-    <a href="{{ route('inicio') }}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-        <img src="{{ asset('uploads/logo.png') }}" alt="Logo" class="navbar-brand" style="height: 140px;">
-        <h5 class=" text-primary" style="font-size: 13px; margin-left: -92px; padding-top: 52px; font-family: Satisfy;">
+<nav @class([
+    'navbar',
+    'navbar-expand-lg',
+    'bg-white',
+    'navbar-light',
+    'sticky-top',
+    'p-0',
+])>
+    <a href="{{ route('inicio') }}" @class([
+        'navbar-brand',
+        'd-flex',
+        'align-items-center',
+        'px-4',
+        'px-lg-5',
+    ])>
+        <img src="{{ asset('uploads/logo.png') }}" alt="Logo" @class(['navbar-brand']) style="height: 140px;">
+        <h5 @class(['text-primary'])
+            style="font-size: 13px; margin-left: -92px; padding-top: 52px; font-family: Satisfy;">
             Compra 100% segura</h5>
     </a>
 
 
 
-    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-        <span class="navbar-toggler-icon"></span>
+    <button type="button" @class(['navbar-toggler', 'me-4']) data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span @class(['navbar-toggler-icon'])></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="navbar-nav ms-auto p-4 p-lg-0 align-items-lg-center">
-            <a href="{{ route('inicio') }}"
-                class="nav-item nav-link {{ request()->routeIs('inicio') ? 'active' : '' }}">Inicio</a>
-            <a href="{{ route('productos.index') }}"
-                class="nav-item nav-link {{ request()->routeIs('productos.*') ? 'active' : '' }}">Productos</a>
-            <a href="{{ route('tiendas.index') }}"
-                class="nav-item nav-link {{ request()->routeIs('tiendas.*') ? 'active' : '' }}">Tiendas</a>
-            <a href="{{ route('contacto') }}"
-                class="nav-item nav-link {{ request()->routeIs('contacto') ? 'active' : '' }}">Contacto</a>
-            <!-- Buscador  -->
-            <form id="search-form" action="#" method="get" class="my-2 my-lg-0 me-lg-3">
-                <div class="input-group input-group-sm border rounded-pill bg-light overflow-hidden"
-                    style="max-width: 600px;">
-                    <select class="form-select border-0 bg-transparent ps-3 pe-1 text-muted"
-                        style="max-width: 95px; font-size: 0.8rem;">
-                        <option value="">Todas</oprouteIs('inicio') ? 'active' : '' }}">
-                        <option value="groceries">Abarrotes</option>
-                        <option value="drinks">Bebidas</option>
-                        <option value="chocolates">Chocolates</option>
+    <div @class(['collapse', 'navbar-collapse']) id="navbarCollapse">
+        <div @class([
+            'navbar-nav',
+            'ms-auto',
+            'p-4',
+            'p-lg-0',
+            'align-items-lg-center',
+        ])>
+            <a href="{{ route('inicio') }}" @class([
+                'nav-item',
+                'nav-link',
+                'active' => request()->routeIs('inicio'),
+            ])>Inicio</a>
+            <a href="{{ route('productos.index') }}" @class([
+                'nav-item',
+                'nav-link',
+                'active' => request()->routeIs('productos.*'),
+            ])>Productos</a>
+            <a href="{{ route('tiendas.index') }}" @class([
+                'nav-item',
+                'nav-link',
+                'active' => request()->routeIs('tiendas.*'),
+            ])>Tiendas</a>
+            <a href="{{ route('contacto') }}" @class([
+                'nav-item',
+                'nav-link',
+                'active' => request()->routeIs('contacto'),
+            ])>Contacto</a>
+
+            <!-- Buscador -->
+            <form id="search-form" action="{{ route('productos.index') }}" method="GET" @class(['my-2', 'my-lg-0', 'me-lg-3'])>
+                <div @class([
+                    'input-group',
+                    'input-group-sm',
+                    'border',
+                    'rounded-pill',
+                    'bg-light',
+                    'overflow-hidden',
+                ]) style="max-width: 600px;">
+
+                    <select name="categoria" onchange="this.form.submit()" @class([
+                        'form-select',
+                        'border-0',
+                        'bg-transparent',
+                        'ps-3',
+                        'pe-1',
+                        'text-muted',
+                        'shadow-none',
+                    ])
+                        style="max-width: 115px; font-size: 0.8rem;" aria-label="Categoría">
+                        <option value="">Todas</option>
+                        @foreach ($categoriasGlobal as $categoria)
+                            <option value="{{ $categoria->id_categoria }}"
+                                {{ request('categoria') == $categoria->id_categoria ? 'selected' : '' }}>
+                                {{ $categoria->nombre }}
+                            </option>
+                        @endforeach
                     </select>
-                    <span class="border-end my-1"></span>
-                    <input type="text" class="form-control border-0 bg-transparent shadow-none"
+
+
+                    <span @class(['border-end', 'my-1'])></span>
+
+                    <input type="text" name="q" value="{{ request('q') }}" @class(['form-control', 'border-0', 'bg-transparent', 'shadow-none'])
                         placeholder="Buscar..." aria-label="Buscar" style="font-size: 0.8rem;">
-                    <button class="btn border-0 text-primary pe-3" type="submit" aria-label="Buscar">
-                        <i class="fa fa-search"></i>
+
+                    <button @class(['btn', 'border-0', 'text-primary', 'pe-3']) type="submit" aria-label="Buscar">
+                        <i @class(['fa', 'fa-search'])></i>
                     </button>
                 </div>
             </form>
 
+
             <!-- Carrito de Compras  -->
-            <div class="cart text-end d-none d-lg-block">
-                <button
-                    class="btn border-0 bg-transparent d-inline-flex align-items-center gap-3 p-0 shadow-none text-start"
-                    type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                    aria-controls="offcanvasCart">
-                    <i class="fa fa-shopping-cart fs-3 text-primary"></i>
-                    <div class="d-flex flex-column lh-sm">
-                        <span class="fs-6 text-muted">Tu Carrito</span>
-                        <span class="cart-total fs-5 fw-bold text-dark">₡{{ number_format($carritoTotal, 0,',','.') }}</span>
+            <div @class(['cart', 'text-end', 'd-none', 'd-lg-block'])>
+                <button @class([
+                    'btn',
+                    'border-0',
+                    'bg-transparent',
+                    'd-inline-flex',
+                    'align-items-center',
+                    'gap-3',
+                    'p-0',
+                    'shadow-none',
+                    'text-start',
+                ]) type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                    <i @class(['fa', 'fa-shopping-cart', 'fs-3', 'text-primary'])></i>
+                    <div @class(['d-flex', 'flex-column', 'lh-sm'])>
+                        <span @class(['fs-6', 'text-muted'])>Tu Carrito</span>
+                        <span @class(['cart-total', 'fs-5', 'fw-bold', 'text-dark'])>₡{{ number_format($carritoTotal, 0, ',', '.') }}</span>
                     </div>
                 </button>
             </div>
@@ -92,8 +165,17 @@
         </div>
 
         <!--  Get A Quote  -->
-        <a href="{{ route('login') }}" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block rounded-0 ms-4">
-            Iniciar Sesión<i class="fa fa-arrow-right ms-3"></i>
+        <a href="{{ route('login') }}" @class([
+            'btn',
+            'btn-primary',
+            'py-4',
+            'px-lg-5',
+            'd-none',
+            'd-lg-block',
+            'rounded-0',
+            'ms-4',
+        ])>
+            Iniciar Sesión<i @class(['fa', 'fa-arrow-right', 'ms-3'])></i>
         </a>
     </div>
 </nav>

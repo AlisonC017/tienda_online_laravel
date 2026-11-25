@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Http\Controllers\CarritoController;
+use App\Models\Categoria;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -28,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
                 'carritoData'     => $carritoData,
                 'carritoTotal'    => $carritoData->sum('subtotal'),
                 'carritoCantidad' => $carritoData->sum('cantidad'),
+                'categoriasGlobal' => Categoria::orderBy('nombre')->get(),
             ]);
         });
     }

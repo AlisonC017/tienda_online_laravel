@@ -12,7 +12,7 @@ class ProductoPublicoController extends Controller
     private function visibles()
     {
         return Producto::where('activo', 1)
-            ->whereHas('tienda', fn ($q) => $q->where('activa', 1));
+            ->whereHas('tienda', fn($q) => $q->where('activa', 1));
     }
 
     public function index(Request $request)
@@ -27,8 +27,14 @@ class ProductoPublicoController extends Controller
 
         $productos = $this->visibles()
             ->with('tienda')
-            ->when($categoriaId, fn ($q) => $q->whereHas('categorias', fn ($c) => $c->where('categorias.id_categoria', $categoriaId)))
-            ->when($busqueda !== '', fn ($q) => $q->where('nombre', 'like', '%' . $busqueda . '%'))
+            ->when($categoriaId, fn($q) => $q->whereHas('categorias', fn($c) => $c->where('categorias.id_categoria', $categoriaId)))
+            ->when($busqueda !== '', function ($q) use ($busqueda) {
+                $q->where(function ($sub) use ($busqueda) {
+                    $sub->where('nombre', 'like', '%' . $busqueda . '%')
+                        ->orWhere('descripcion', 'like', '%' . $busqueda . '%')
+                        ->orWhereHas('tienda', fn($t) => $t->where('nombre', 'like', '%' . $busqueda . '%'));
+                });
+            })
             ->orderByDesc('id_producto')
             ->paginate(12)
             ->withQueryString();
@@ -37,7 +43,7 @@ class ProductoPublicoController extends Controller
         $categorias = Categoria::orderBy('nombre')
             ->withCount(['productos as total' => function ($q) {
                 $q->where('productos.activo', 1)
-                  ->whereHas('tienda', fn ($t) => $t->where('activa', 1));
+                    ->whereHas('tienda', fn($t) => $t->where('activa', 1));
             }])
             ->get();
 
@@ -45,9 +51,15 @@ class ProductoPublicoController extends Controller
         $categoriaActual = $categorias->firstWhere('id_categoria', $categoriaId);
 
         return view('modules.landing.productos.index', compact(
-            'productos', 'categorias', 'totalGeneral', 'categoriaId', 'categoriaActual', 'busqueda'
+            'productos',
+            'categorias',
+            'totalGeneral',
+            'categoriaId',
+            'categoriaActual',
+            'busqueda'
         ));
     }
+
 
     public function show($id)
     {

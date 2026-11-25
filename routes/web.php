@@ -95,6 +95,7 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/productos/{producto}/estado', [ProductoController::class, 'cambiarEstado'])
             ->name('productos.estado');
 
+
         // PEDIDOS
         Route::get('/pedidos', [PedidoTiendaController::class, 'index'])
             ->name('pedidos.index');
