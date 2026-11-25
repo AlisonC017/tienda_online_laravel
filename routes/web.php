@@ -13,25 +13,14 @@ use App\Http\Controllers\AdminTiendaController;
 // PUBLICO
 Route::get('/', [ControllerNavigation::class, 'landing'])->name('inicio');
 
-Route::get('/p', function () {
-    return view('modules.landing.productos.index');
-})->name('productos.index');
+Route::get('/p', [ProductoPublicoController::class, 'index'])->name('productos.index');
+Route::get('/ps/{id}', [ProductoPublicoController::class, 'show'])->name('productos.show');
 
-Route::get('/ps/{id}', function ($id) {
-    return view('modules.landing.productos.show', compact('id'));
-})->name('productos.show');
-
-Route::get('/ti', function () {
-    return view('modules.landing.tiendas.index');
-})->name('tiendas.index');
-
-Route::get('/ti/{id}', function ($id) {
-    return view('modules.landing.tiendas.show', compact('id'));
-})->name('tiendas.show');
-
-Route::post('/ti/{id}/contacto', function ($id) {
-    return redirect()->route('tiendas.show', $id)->with('ok', 'Mensaje enviado a la tienda.');
-})->name('tiendas.contacto');
+Route::get('/ti', [TiendaPublicaController::class, 'index'])->name('tiendas.index');
+Route::get('/ti/{id}', [TiendaPublicaController::class, 'show'])->name('tiendas.show');
+Route::post('/ti/{id}/contacto', [TiendaPublicaController::class, 'contacto'])
+    ->middleware('throttle:5,1')
+    ->name('tiendas.contacto');
 
 Route::get('/contacto', function () {
     return view('modules.landing.contacto');
@@ -69,13 +58,8 @@ Route::middleware(['auth'])->group(function () {
             return view('modules.tienda.index');
         })->name('index');
 
-        Route::get('/mi-tienda', function () {
-            return view('modules.tienda.mi-tienda');
-        })->name('mi-tienda');
-
-        Route::put('/mi-tienda', function () {
-            return redirect()->route('tienda.mi-tienda')->with('ok', 'Cambios guardados.');
-        })->name('mi-tienda.update');
+        Route::get('/mi-tienda', [TiendaPerfilController::class, 'edit'])->name('mi-tienda');
+        Route::put('/mi-tienda', [TiendaPerfilController::class, 'update'])->name('mi-tienda.update');
     });
 
     // ADMINISTRADOR - PEDIDOS

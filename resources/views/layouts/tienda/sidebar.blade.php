@@ -26,7 +26,7 @@
 
                 <!-- Tiendas -->
                 <li class="nav-item">
-                    <a href="#">
+                   <a href="{{ route('tienda.mi-tienda') }}">
                         <i class="fas fa-store"></i>
                         <p>Mi tienda</p>
                     </a>
