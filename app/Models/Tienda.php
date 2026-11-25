@@ -110,6 +110,7 @@ class Tienda extends Model
         return $base.ltrim($valor, '@/');
     }
 
+    // Para el Slider
     public function detalles()
     {
         return $this->hasMany(Detalle::class, 'id_tienda', 'id_tienda');
