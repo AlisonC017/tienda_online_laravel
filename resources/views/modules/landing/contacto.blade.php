@@ -12,7 +12,7 @@
 
                 <!-- Información de contacto -->
                 <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="bg-light rounded p-4 h-100">
+                    <div class=" bg-white border rounded shadow-sm p-4 h-100">
                         <h4 class="mb-4">¿Tenés dudas? Escribinos</h4>
 
                         <div class="d-flex align-items-center mb-4">
