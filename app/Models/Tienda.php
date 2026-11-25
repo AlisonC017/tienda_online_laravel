@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Tienda extends Model
 {
     protected $table = 'tiendas';
+
     protected $primaryKey = 'id_tienda';
+
     public $timestamps = false;
 
     protected $fillable = [
@@ -19,7 +21,7 @@ class Tienda extends Model
 
     protected $casts = [
         'destacada' => 'boolean',
-        'activa'    => 'boolean',
+        'activa' => 'boolean',
     ];
 
     public function usuario()
@@ -66,17 +68,17 @@ class Tienda extends Model
             return null;
         }
         if (strlen($numero) === 8) {
-            $numero = '506' . $numero;
+            $numero = '506'.$numero;
         }
 
-        return 'https://wa.me/' . $numero;
+        return 'https://wa.me/'.$numero;
     }
 
     public function telefonoUrl(): ?string
     {
         $numero = preg_replace('/[^\d+]/', '', (string) $this->telefono);
 
-        return $numero === '' ? null : 'tel:' . $numero;
+        return $numero === '' ? null : 'tel:'.$numero;
     }
 
     public function instagramUrl(): ?string
@@ -105,6 +107,21 @@ class Tienda extends Model
             return $valor;
         }
 
-        return $base . ltrim($valor, '@/');
+        return $base.ltrim($valor, '@/');
+    }
+
+    public function detalles()
+    {
+        return $this->hasMany(Detalle::class, 'id_tienda', 'id_tienda');
+    }
+
+    public function scopeTopVentas($query, int $limite = 3)
+    {
+        return $query->activas()
+            ->withSum(['detalles as monto_vendido' => fn ($d) => $d->whereHas('pedido', fn ($p) => $p->where('estado', 'Entregado')),
+            ], 'subtotal')
+            ->having('monto_vendido', '>', 0)
+            ->orderByDesc('monto_vendido')
+            ->limit($limite);
     }
 }
