@@ -2,22 +2,42 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->categorias();
+        $this->admin();
+    }
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+    private function categorias(): void
+    {
+        $categorias = ['Tecnología', 'Hogar', 'Moda', 'Belleza', 'Deportes', 'Juguetes', 'Alimentos', 'Mascotas'];
+
+        foreach ($categorias as $nombre) {
+            if (!DB::table('categorias')->where('nombre', $nombre)->exists()) {
+                DB::table('categorias')->insert(['nombre' => $nombre]);
+            }
+        }
+    }
+
+    private function admin(): void
+    {
+        DB::table('usuarios')->insertOrIgnore([
+            'google_id' => '109876543210987654321',
+            'nombre'    => 'Admin',
+            'correo'    => 'admin@gmail.com',
+            'foto'      => null,
+            'rol'       => 'administrador',
         ]);
+
+        DB::table('usuarios')
+            ->where('correo', 'admin@gmail.com')
+            ->whereNull('password')
+            ->update(['password' => Hash::make('admin12345')]);
     }
 }
