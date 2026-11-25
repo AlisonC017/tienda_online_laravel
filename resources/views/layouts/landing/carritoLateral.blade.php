@@ -47,3 +47,16 @@
         </div>
     </div>
 </div>
+
+@if (session('ok') || session('error'))
+    <div id="toastCriko" class="alert {{ session('ok') ? 'alert-success' : 'alert-danger' }} shadow"
+        style="position: fixed; top: 20px; right: 20px; z-index: 2000; max-width: 350px;">
+        {{ session('ok') ?? session('error') }}
+    </div>
+    <script>
+        setTimeout(function() {
+            var t = document.getElementById('toastCriko');
+            if (t) t.remove();
+        }, 5000);
+    </script>
+@endif

@@ -52,7 +52,7 @@ class CarritoController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->validate([
-            'cantidad' => 'required|integer\min:1|max:99',
+            'cantidad' => 'required|integer|min:1|max:99',
         ]);
 
         $carrito = session('carrito', []);
