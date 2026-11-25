@@ -57,7 +57,7 @@ class PedidoController extends Controller
                 'fecha' => now(),
                 'cliente' => $input['cliente'],
                 'correo' => $input['correo'],
-                'telefono' => $input['telefono'] ?? null,
+                'telefono' => $input['telefono'] ?? '',
                 'total' => $data->sum('subtotal'),
                 'estado' => 'En preparacion',
             ]);
@@ -89,7 +89,7 @@ class PedidoController extends Controller
         }
 
 
-        return redirect('/')->with('ok', 'Pedido #' . $pedido->pedido . ' registrado!');
+        return redirect('/')->with('ok', 'Pedido #' . $pedido->id_pedido . ' realizado con exito! Te enviamos el desglose a tu correo.');
     }
 
     /**

@@ -13,6 +13,7 @@ use App\Http\Controllers\ProductoPublicoController;
 use App\Http\Controllers\TiendaPublicaController;
 use App\Http\Controllers\TiendaPerfilController;
 
+
 // PUBLICO
 Route::get('/', [ControllerNavigation::class, 'landing'])->name('inicio');
 
