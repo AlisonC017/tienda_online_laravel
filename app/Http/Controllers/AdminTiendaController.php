@@ -8,7 +8,11 @@ class AdminTiendaController extends Controller
 {
     public function index()
     {
-        $tiendas = Tienda::orderBy('nombre')->get();
+        $tiendas = Tienda::with('usuario')
+        ->withCount('productos')
+        ->orderBy('nombre')
+        ->get();
+        
         return view('modules.admin.tienda.index', compact('tiendas'));
     }
 

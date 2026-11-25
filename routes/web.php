@@ -13,7 +13,6 @@ use App\Http\Controllers\ProductoPublicoController;
 use App\Http\Controllers\TiendaPublicaController;
 use App\Http\Controllers\TiendaPerfilController;
 
-
 // PUBLICO
 Route::get('/', [ControllerNavigation::class, 'landing'])->name('inicio');
 
@@ -34,10 +33,6 @@ Route::get('/contacto', function () {
 Route::get('/login', [ControllerNavigation::class, 'login'])->name('login');
 Route::post('/login', [ControllerAuth::class, 'login'])->name('login.post');
 Route::post('/register', [ControllerAuth::class, 'register'])->name('register.post');
-
-// GOOGLE
-Route::get('/auth/google', [ControllerAuth::class, 'redirectToGoogle'])->name('google.redirect');
-Route::get('/auth/google/callback', [ControllerAuth::class, 'handleGoogleCallback']);
 
 // RUTAS PROTEGIDAS
 Route::middleware(['auth'])->group(function () {

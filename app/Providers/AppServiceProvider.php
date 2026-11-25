@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer('layouts.landing.header', function ($view) {
+        View::composer('layouts.landing.*', function ($view) {
             $carritoData = CarritoController::items();
 
             $view->with([
