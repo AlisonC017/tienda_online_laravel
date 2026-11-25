@@ -5,14 +5,13 @@ use App\Http\Controllers\PedidoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControllerNavigation;
 use App\Http\Controllers\ControllerAuth;
-use App\Http\Controllers\ProductoPublicoController;
-use App\Http\Controllers\TiendaPerfilController;
-use App\Http\Controllers\TiendaPublicaController;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\PedidoTiendaController;
+use App\Http\Controllers\PedidoAdminController;
+use App\Http\Controllers\AdminTiendaController;
 
 // PUBLICO
-Route::get('/', function () {
-    return view('modules.landing.index');
-})->name('inicio');
+Route::get('/', [ControllerNavigation::class, 'landing'])->name('inicio');
 
 Route::get('/p', [ProductoPublicoController::class, 'index'])->name('productos.index');
 Route::get('/ps/{id}', [ProductoPublicoController::class, 'show'])->name('productos.show');
@@ -38,14 +37,18 @@ Route::get('/auth/google/callback', [ControllerAuth::class, 'handleGoogleCallbac
 
 // RUTAS PROTEGIDAS
 Route::middleware(['auth'])->group(function () {
-
     Route::get('/dashboard', [ControllerNavigation::class, 'dashboard'])->name('dashboard');
 
     // ADMINISTRADOR
     Route::middleware(['rol:administrador'])->prefix('admin')->name('admin.')->group(function () {
         Route::get('/', function () {
-            return view('modules.admin.index');
+            return redirect()->route('admin.pedidos.index');
         })->name('index');
+
+        // TIENDAS
+        Route::get('/tiendas', [AdminTiendaController::class, 'index'])->name('tiendas.index');
+        Route::patch('/tiendas/{tienda}/activa', [AdminTiendaController::class, 'toggleActiva'])->name('tiendas.activa');
+        Route::patch('/tiendas/{tienda}/destacada', [AdminTiendaController::class, 'toggleDestacada'])->name('tiendas.destacada');
     });
 
 
@@ -58,6 +61,52 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/mi-tienda', [TiendaPerfilController::class, 'edit'])->name('mi-tienda');
         Route::put('/mi-tienda', [TiendaPerfilController::class, 'update'])->name('mi-tienda.update');
     });
+
+    // ADMINISTRADOR - PEDIDOS
+    Route::middleware(['rol:administrador'])->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/pedidos', [PedidoAdminController::class, 'index'])
+            ->name('pedidos.index');
+
+        Route::get('/pedidos/{pedido}', [PedidoAdminController::class, 'show'])
+            ->name('pedidos.show');
+
+        Route::patch('/pedidos/{pedido}/entregar', [PedidoAdminController::class, 'entregar'])
+            ->name('pedidos.entregar');
+    });
+
+    // TIENDA - PRODUCTOS Y PEDIDOS
+    Route::middleware(['rol:tienda'])->prefix('tienda')->name('tienda.')->group(function () {
+
+        // PRODUCTOS
+        Route::get('/productos', [ProductoController::class, 'index'])
+            ->name('productos.index');
+
+        Route::get('/productos/crear', [ProductoController::class, 'create'])
+            ->name('productos.create');
+
+        Route::post('/productos', [ProductoController::class, 'store'])
+            ->name('productos.store');
+
+        Route::get('/productos/{producto}/editar', [ProductoController::class, 'edit'])
+            ->name('productos.edit');
+
+        Route::put('/productos/{producto}', [ProductoController::class, 'update'])
+            ->name('productos.update');
+
+        Route::patch('/productos/{producto}/estado', [ProductoController::class, 'cambiarEstado'])
+            ->name('productos.estado');
+
+        // PEDIDOS
+        Route::get('/pedidos', [PedidoTiendaController::class, 'index'])
+            ->name('pedidos.index');
+
+        Route::get('/pedidos/{pedido}', [PedidoTiendaController::class, 'show'])
+            ->name('pedidos.show');
+
+        Route::patch('/pedidos/detalle/{detalle}/listo', [PedidoTiendaController::class, 'marcarListo'])
+            ->name('pedidos.listo');
+    });
+
     // CERRAR SESION
     Route::post('/logout', [ControllerAuth::class, 'logout'])->name('logout');
 });

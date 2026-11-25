@@ -2,78 +2,34 @@
 
 @section('contenido')
     <!-- Carousel Start -->
-    <div class="container-fluid p-0 pb-5">
-        <div class="owl-carousel header-carousel position-relative">
-            <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" src="img/carousel-1.jpg" alt="">
-                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
-                    style="background: rgba(53, 53, 53, .7);">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-12 col-lg-8 text-center">
-                                <h5 class="text-white text-uppercase mb-3 animated slideInDown">Welcome To WooDY</h5>
-                                <h1 class="display-3 text-white animated slideInDown mb-4">Best Carpenter & Craftsman
-                                    Services</h1>
-                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor
-                                    at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea
-                                    elitr.</p>
-                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
-                                    More</a>
-                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free
-                                    Quote</a>
+    @if ($destacadas->isNotEmpty())
+        <div class="container-fluid p-0 pb-5">
+            <div class="owl-carousel header-carousel position-relative">
+                @foreach ($destacadas as $t)
+                    <div class="owl-carousel-item position-relative">
+                        <img class="img-fluid w-100" style="height:480px;object-fit:cover"
+                            src="{{ $t->banner ? asset('uploads/' . $t->banner) : 'https://placehold.co/1400x480?text=' . urlencode($t->nombre) }}"
+                            alt="Banner de {{ $t->nombre }}">
+                        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+                            style="background: rgba(53, 53, 53, .7);">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-12 col-lg-8 text-center">
+                                        <img src="{{ $t->logo ? asset('uploads/' . $t->logo) : 'https://placehold.co/120x120?text=Logo' }}"
+                                            class="rounded-circle border border-3 border-white bg-white mb-3"
+                                            style="width:120px;height:120px;object-fit:cover" alt="Logo de {{ $t->nombre }}">
+                                        <h1 class="display-4 text-white animated slideInDown mb-4">{{ $t->nombre }}</h1>
+                                        <a href="{{ route('tiendas.show', $t->id_tienda) }}"
+                                            class="btn btn-primary py-md-3 px-md-5 animated slideInLeft">Ver tienda</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" src="img/carousel-2.jpg" alt="">
-                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
-                    style="background: rgba(53, 53, 53, .7);">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-12 col-lg-8 text-center">
-                                <h5 class="text-white text-uppercase mb-3 animated slideInDown">Welcome To WooDY</h5>
-                                <h1 class="display-3 text-white animated slideInDown mb-4">Best Carpenter & Craftsman
-                                    Services</h1>
-                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum
-                                    dolor
-                                    at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea
-                                    elitr.</p>
-                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
-                                    More</a>
-                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free
-                                    Quote</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" src="img/carousel-3.jpg" alt="">
-                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
-                    style="background: rgba(53, 53, 53, .7);">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-12 col-lg-8 text-center">
-                                <h5 class="text-white text-uppercase mb-3 animated slideInDown">Welcome To WooDY</h5>
-                                <h1 class="display-3 text-white animated slideInDown mb-4">Best Carpenter & Craftsman
-                                    Services</h1>
-                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum
-                                    dolor
-                                    at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea
-                                    elitr.</p>
-                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read
-                                    More</a>
-                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Free
-                                    Quote</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
-    </div>
+    @endif
     <!-- Carousel End -->
 
 
@@ -235,8 +191,7 @@
                             <div class="portfolio-overlay">
                                 <a class="btn btn-square btn-outline-light mx-1" href="img/portfolio-1.jpg"
                                     data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-square btn-outline-light mx-1" href=""><i
-                                        class="fa fa-link"></i></a>
+                                <a class="btn btn-square btn-outline-light mx-1" href=""><i class="fa fa-link"></i></a>
                             </div>
                         </div>
                         <div class="border border-5 border-light border-top-0 p-4">
@@ -252,8 +207,7 @@
                             <div class="portfolio-overlay">
                                 <a class="btn btn-square btn-outline-light mx-1" href="img/portfolio-2.jpg"
                                     data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-square btn-outline-light mx-1" href=""><i
-                                        class="fa fa-link"></i></a>
+                                <a class="btn btn-square btn-outline-light mx-1" href=""><i class="fa fa-link"></i></a>
                             </div>
                         </div>
                         <div class="border border-5 border-light border-top-0 p-4">
@@ -269,8 +223,7 @@
                             <div class="portfolio-overlay">
                                 <a class="btn btn-square btn-outline-light mx-1" href="img/portfolio-3.jpg"
                                     data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-square btn-outline-light mx-1" href=""><i
-                                        class="fa fa-link"></i></a>
+                                <a class="btn btn-square btn-outline-light mx-1" href=""><i class="fa fa-link"></i></a>
                             </div>
                         </div>
                         <div class="border border-5 border-light border-top-0 p-4">
@@ -286,8 +239,7 @@
                             <div class="portfolio-overlay">
                                 <a class="btn btn-square btn-outline-light mx-1" href="img/portfolio-4.jpg"
                                     data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-square btn-outline-light mx-1" href=""><i
-                                        class="fa fa-link"></i></a>
+                                <a class="btn btn-square btn-outline-light mx-1" href=""><i class="fa fa-link"></i></a>
                             </div>
                         </div>
                         <div class="border border-5 border-light border-top-0 p-4">
@@ -303,8 +255,7 @@
                             <div class="portfolio-overlay">
                                 <a class="btn btn-square btn-outline-light mx-1" href="img/portfolio-5.jpg"
                                     data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-square btn-outline-light mx-1" href=""><i
-                                        class="fa fa-link"></i></a>
+                                <a class="btn btn-square btn-outline-light mx-1" href=""><i class="fa fa-link"></i></a>
                             </div>
                         </div>
                         <div class="border border-5 border-light border-top-0 p-4">
@@ -320,8 +271,7 @@
                             <div class="portfolio-overlay">
                                 <a class="btn btn-square btn-outline-light mx-1" href="img/portfolio-6.jpg"
                                     data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
-                                <a class="btn btn-square btn-outline-light mx-1" href=""><i
-                                        class="fa fa-link"></i></a>
+                                <a class="btn btn-square btn-outline-light mx-1" href=""><i class="fa fa-link"></i></a>
                             </div>
                         </div>
                         <div class="border border-5 border-light border-top-0 p-4">

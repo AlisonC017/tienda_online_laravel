@@ -9,6 +9,7 @@ class Detalle extends Model
     protected $table = 'detalles';
     protected $primaryKey = 'id_detalle';
     public $timestamps = false;
+
     protected $fillable = [
         'id_pedido',
         'id_producto',
@@ -18,6 +19,23 @@ class Detalle extends Model
         'precio',
         'cantidad',
         'subtotal',
-        'estado'
+        'estado',
     ];
+
+    protected $attributes = ['estado' => 'En espera'];
+
+    public function pedido()
+    {
+        return $this->belongsTo(Pedido::class, 'id_pedido', 'id_pedido');
+    }
+
+    public function producto()
+    {
+        return $this->belongsTo(Producto::class, 'id_producto', 'id_producto');
+    }
+
+    public function tienda()
+    {
+        return $this->belongsTo(Tienda::class, 'id_tienda', 'id_tienda');
+    }
 }

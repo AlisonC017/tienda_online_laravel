@@ -34,7 +34,7 @@
 
                 <!-- Productos -->
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="{{ route('tienda.productos.index') }}">
                         <i class="fas fa-shopping-bag"></i>
                         <p>Mis productos</p>
                     </a>
@@ -42,7 +42,7 @@
 
                 <!-- Pedidos -->
                 <li class="nav-item">
-                    <a href="#">
+                    <a href="{{ route('tienda.pedidos.index') }}">
                         <i class="fas fa-shopping-bag"></i>
                         <p>Mis Pedidos</p>
                     </a>

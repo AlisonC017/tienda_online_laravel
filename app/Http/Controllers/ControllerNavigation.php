@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use App\Models\Tienda;
 
 class ControllerNavigation extends Controller
 {
+
     public function landing()
     {
-        return view('modules.landing.index');
-    }
+        $destacadas = Tienda::where('destacada', true)->where('activa', true)->get();
 
+        return view('modules.landing.index', compact('destacadas'));
+    }
     public function login()
     {
         return view('login');
