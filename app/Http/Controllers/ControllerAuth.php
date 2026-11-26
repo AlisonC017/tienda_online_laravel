@@ -28,7 +28,9 @@ class ControllerAuth extends Controller
         $user->nombre = $request->nombre;
         $user->correo = $request->correo;
         $user->password = Hash::make($request->password);
+        $user->rol = 'tienda';
         $user->save();
+
         Tienda::firstOrCreate(
             ['id_usuario' => $user->id_usuario],
             ['nombre' => $user->nombre, 'descripcion' => 'Bienvenido a mi tienda', 'destacada' => false, 'activa' => true]
@@ -84,7 +86,6 @@ class ControllerAuth extends Controller
             $user = User::where('correo', $googleUser->getEmail())->first();
 
             if ($user) {
-                //  no vincular Google a la cuenta administrador
                 if ($user->esAdmin()) {
                     return redirect()->route('login')->withErrors([
                         'google' => 'Esta cuenta solo puede ingresar con correo y contraseña.',
@@ -103,7 +104,15 @@ class ControllerAuth extends Controller
             $user->correo    = $googleUser->getEmail();
             $user->foto      = $googleUser->getAvatar();
             $user->google_id = $googleUser->getId();
+            $user->rol       = 'tienda';
             $user->save();
+        }
+
+        if (!$user->esAdmin()) {
+            Tienda::firstOrCreate(
+                ['id_usuario' => $user->id_usuario],
+                ['nombre' => $user->nombre, 'descripcion' => 'Bienvenido a mi tienda', 'destacada' => false, 'activa' => true]
+            );
         }
 
         Auth::login($user);
