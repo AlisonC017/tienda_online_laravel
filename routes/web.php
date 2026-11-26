@@ -54,7 +54,7 @@ Route::middleware(['auth'])->group(function () {
     // TIENDA
     Route::middleware(['rol:tienda'])->prefix('tienda')->name('tienda.')->group(function () {
         Route::get('/', function () {
-            return view('modules.tienda.index');
+            return redirect()->route('tienda.mi-tienda');
         })->name('index');
 
         Route::get('/mi-tienda', [TiendaPerfilController::class, 'edit'])->name('mi-tienda');

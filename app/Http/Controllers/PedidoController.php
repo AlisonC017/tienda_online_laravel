@@ -49,7 +49,7 @@ class PedidoController extends Controller
         $data = CarritoController::items();
 
         if ($data->isEmpty()) {
-            redirect()->route('carrito.index')->with('Error', 'Tu carrito ta vacio');
+            return redirect()->route('carrito.index')->with('error', 'Tu carrito ta vacio');
         }
 
         $pedido = DB::transaction(function () use ($input, $data) {
@@ -86,10 +86,6 @@ class PedidoController extends Controller
             Mail::to($pedido->correo)->send(new PedidoConfirmado($pedido->load('detalles')));
         } catch (\Exception $e) {
             Log::error('No se puedo enviar el correo del pedido: ' . $e->getMessage());
-        }
-
-        if ($data->isEmpty()) {
-            return redirect()->route('carrito.index')->with('error', 'Tu carrito está vacío');
         }
 
         return redirect('/')->with('ok', '¡Compra realizada! Pedido #' . $pedido->id_pedido . '. Te enviamos el detalle a tu correo.');
