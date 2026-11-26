@@ -1,6 +1,13 @@
+@php
+    $tiendaHeader = Auth::user()->tienda;
+    $avatar = ($tiendaHeader && $tiendaHeader->logo && file_exists(public_path('uploads/' . basename($tiendaHeader->logo))))
+        ? asset('uploads/' . basename($tiendaHeader->logo))
+        : Auth::user()->imagen();
+@endphp
+
 <div class="main-header">
     <div class="main-header-logo">
-        <!-- Logo Header -->
+        
         <div class="logo-header" data-background-color="dark">
             <a href="{{ route('tienda.index') }}" class="logo">
                 <img src="{{ asset('uploads/logo.png') }}" alt="navbar brand" class="navbar-brand"
@@ -18,9 +25,9 @@
                 <i class="gg-more-vertical-alt"></i>
             </button>
         </div>
-        <!-- End Logo Header -->
+        
     </div>
-    <!-- Navbar Header -->
+    
     <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
         <div class="container-fluid">
 
@@ -78,7 +85,8 @@
                     <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#"
                         aria-expanded="false">
                         <div class="avatar-sm">
-                            <img src="{{ Auth::user()->imagen() }}" alt="Foto de perfil"
+                            <img src="{{ $avatar }}" alt="Foto de perfil" referrerpolicy="no-referrer"
+                                onerror="this.onerror=null;this.src='{{ asset('uploads/user.png') }}'"
                                 class="avatar-img rounded-circle" />
                         </div>
                         <span class="profile-username">
@@ -91,7 +99,8 @@
                             <li>
                                 <div class="user-box">
                                     <div class="avatar-lg">
-                                        <img src="{{ Auth::user()->imagen() }}" alt="Foto de perfil"
+                                        <img src="{{ $avatar }}" alt="Foto de perfil" referrerpolicy="no-referrer"
+                                            onerror="this.onerror=null;this.src='{{ asset('uploads/user.png') }}'"
                                             class="avatar-img rounded" />
                                     </div>
                                     <div class="u-text">
