@@ -6,7 +6,7 @@
     <title>CrikoStore - @yield('tittle')</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
     <link rel="icon" href="themes/admin/assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
-
+    @stack('head')
     @include('layouts.tienda.css')
 </head>
 

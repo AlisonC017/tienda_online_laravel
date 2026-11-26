@@ -43,7 +43,8 @@
                                 <td>{{ $listos }} de {{ $misDetalles->count() }}</td>
                                 <td>@include('layouts.estado', ['estado' => $pedido->estado])</td>
                                 <td>
-                                    <a href="{{ route('tienda.pedidos.show', $pedido) }}" class="btn btn-sm btn-primary">Ver</a>
+                                    <a href="{{ route('tienda.pedidos.show', $pedido) }}"
+                                        class="btn btn-sm btn-primary">Ver</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -54,7 +55,7 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             $('#tabla-pedidos').DataTable({
                 order: [],
                 columnDefs: [{
@@ -74,5 +75,36 @@
                 }
             });
         });
+    </script>
+
+    <script>
+        (function() {
+            const url = window.location.href;
+
+            async function actualizar() {
+                if (document.hidden) return; // no consulta si la pestaña no está visible
+
+                try {
+                    const r = await fetch(url, {
+                        credentials: 'same-origin',
+                        cache: 'no-store'
+                    });
+                    if (!r.ok) return;
+
+                    const html = await r.text();
+                    const doc = new DOMParser().parseFromString(html, 'text/html');
+                    const nuevo = doc.getElementById('lista-pedidos');
+                    const actual = document.getElementById('lista-pedidos');
+
+                    if (nuevo && actual && nuevo.innerHTML !== actual.innerHTML) {
+                        actual.innerHTML = nuevo.innerHTML;
+                    }
+                } catch (e) {
+                    // si falla la red, lo intenta en el siguiente ciclo
+                }
+            }
+
+            setInterval(actualizar, 3000);
+        })();
     </script>
 @endsection

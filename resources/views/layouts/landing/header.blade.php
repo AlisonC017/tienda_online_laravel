@@ -139,7 +139,7 @@
 
 
             <!-- Carrito de Compras  -->
-            <div @class(['cart', 'text-end', 'd-none', 'd-lg-block'])>
+            <div @class(['cart', 'text-end', 'my-2', 'my-lg-0'])>
                 <button @class([
                     'btn',
                     'border-0',
