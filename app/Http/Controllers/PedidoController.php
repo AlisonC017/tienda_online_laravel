@@ -28,7 +28,7 @@ class PedidoController extends Controller
         $data = CarritoController::items();
 
         if ($data->isEmpty()) {
-            return redirect()->route('carrito.index')->with('Error', 'Tu carrito esta vacio');
+            return redirect()->route('carrito.index')->with('error', 'Tu carrito esta vacio');
         }
 
         $total = $data->sum('subtotal');
@@ -59,7 +59,7 @@ class PedidoController extends Controller
                 'correo' => $input['correo'],
                 'telefono' => $input['telefono'] ?? '',
                 'total' => $data->sum('subtotal'),
-                'estado' => 'En preparacion',
+                'estado' => 'En preparación',
             ]);
 
             foreach ($data as $item) {
@@ -88,8 +88,11 @@ class PedidoController extends Controller
             Log::error('No se puedo enviar el correo del pedido: ' . $e->getMessage());
         }
 
+        if ($data->isEmpty()) {
+            return redirect()->route('carrito.index')->with('error', 'Tu carrito está vacío');
+        }
 
-        return redirect('/')->with('ok', 'Pedido #' . $pedido->id_pedido . ' realizado con exito! Te enviamos el desglose a tu correo.');
+        return redirect('/')->with('ok', '¡Compra realizada! Pedido #' . $pedido->id_pedido . '. Te enviamos el detalle a tu correo.');
     }
 
     /**

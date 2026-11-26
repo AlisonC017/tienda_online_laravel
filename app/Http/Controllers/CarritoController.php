@@ -23,25 +23,28 @@ class CarritoController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate(
-            [
-                'nombre' => 'required|string|max:100',
-                'cantidad' => 'required|integer|min:1|max:99',
-            ]
-        );
+        $data = $request->validate([
+            'id_producto' => 'nullable|integer|required_without:nombre',
+            'nombre'      => 'nullable|string|max:100|required_without:id_producto',
+            'cantidad'    => 'required|integer|min:1|max:99',
+        ]);
 
-        $producto = Producto::with('tienda')
-            ->where('nombre', 'like', '%' . $data['nombre'] . '%')
-            ->where('activo', 1)
-            ->first();
+        $query = Producto::with('tienda')->where('activo', 1);
+
+        if (!empty($data['id_producto'])) {
+            $producto = $query->where('id_producto', $data['id_producto'])->first();
+        } else {
+            $producto = (clone $query)->where('nombre', $data['nombre'])->first()
+                ?? $query->where('nombre', 'like', '%' . $data['nombre'] . '%')->first();
+        }
 
         if (!$producto || !$producto->tienda->activa) {
-            return back()->with('error', 'Producto no disponible :b');
+            return back()->with('error', 'No encontré ese producto :b');
         }
 
         $carrito = session('carrito', []);
         $id = $producto->id_producto;
-        $carrito[$id] = min(99, ($carrito[$id] ?? 0 + $data['cantidad']));
+        $carrito[$id] = min(99, ($carrito[$id] ?? 0) + $data['cantidad']);
         session(['carrito' => $carrito]);
 
         return back()->with('ok', 'Producto agregado al carrito :D');

@@ -78,11 +78,12 @@
                     <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#"
                         aria-expanded="false">
                         <div class="avatar-sm">
-                            <img src="assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle" />
+                            <img src="{{ Auth::user()->imagen() }}" alt="Foto de perfil"
+                                class="avatar-img rounded-circle" />
                         </div>
                         <span class="profile-username">
-                            <span class="op-7">Hi,</span>
-                            <span class="fw-bold">Hizrian</span>
+                            <span class="op-7">Hola,</span>
+                            <span class="fw-bold">{{ Auth::user()->nombre }}</span>
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -90,14 +91,12 @@
                             <li>
                                 <div class="user-box">
                                     <div class="avatar-lg">
-                                        <img src="assets/img/profile.jpg" alt="image profile"
+                                        <img src="{{ Auth::user()->imagen() }}" alt="Foto de perfil"
                                             class="avatar-img rounded" />
                                     </div>
                                     <div class="u-text">
-                                        <h4>Hizrian</h4>
-                                        <p class="text-muted">hello@example.com</p>
-                                        <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View
-                                            Profile</a>
+                                        <h4>{{ Auth::user()->nombre }}</h4>
+                                        <p class="text-muted">{{ Auth::user()->correo }}</p>
                                     </div>
                                 </div>
                             </li>
@@ -105,7 +104,7 @@
                                 <div class="dropdown-divider"></div>
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="dropdown-item">Logout</button>
+                                    <button type="submit" class="dropdown-item">Cerrar sesión</button>
                                 </form>
                             </li>
                         </div>

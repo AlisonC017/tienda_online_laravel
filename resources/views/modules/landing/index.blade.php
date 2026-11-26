@@ -1,6 +1,19 @@
 @extends('app')
 
 @section('contenido')
+
+    @if (session('ok'))
+        <div id="avisoCompra" class="alert alert-success shadow"
+            style="position: fixed; bottom: 20px; right: 20px; z-index: 2000; max-width: 350px;">
+            {{ session('ok') }}
+        </div>
+        <script>
+            setTimeout(function() {
+                var a = document.getElementById('avisoCompra');
+                if (a) a.remove();
+            }, 5000);
+        </script>
+    @endif
     <!-- Carousel Start -->
     @if ($destacadas->isNotEmpty())
         <div @class(['container-fluid', 'p-0', 'pb-5'])>
@@ -9,18 +22,38 @@
                     <div @class(['owl-carousel-item', 'position-relative'])>
                         <img @class(['img-fluid', 'w-100']) style="height:480px;object-fit:cover"
                             src="{{ $t->bannerUrl('1400x480') }}" alt="Banner de {{ $t->nombre }}">
-                        <div @class(['position-absolute', 'top-0', 'start-0', 'w-100', 'h-100', 'd-flex', 'align-items-center'])
-                            style="background: rgba(53, 53, 53, .7);">
+                        <div @class([
+                            'position-absolute',
+                            'top-0',
+                            'start-0',
+                            'w-100',
+                            'h-100',
+                            'd-flex',
+                            'align-items-center',
+                        ]) style="background: rgba(53, 53, 53, .7);">
                             <div @class(['container'])>
                                 <div @class(['row', 'justify-content-center'])>
                                     <div @class(['col-12', 'col-lg-8', 'text-center'])>
-                                        <img src="{{ $t->logoUrl('120x120') }}"
-                                            @class(['rounded-circle', 'border', 'border-3', 'border-white', 'bg-white', 'mb-3'])
+                                        <img src="{{ $t->logoUrl('120x120') }}" @class([
+                                            'rounded-circle',
+                                            'border',
+                                            'border-3',
+                                            'border-white',
+                                            'bg-white',
+                                            'mb-3',
+                                        ])
                                             style="width:120px;height:120px;object-fit:cover"
                                             alt="Logo de {{ $t->nombre }}">
                                         <h1 @class(['display-4', 'text-white', 'animated', 'slideInDown', 'mb-4'])>{{ $t->nombre }}</h1>
                                         <a href="{{ route('tiendas.show', $t->id_tienda) }}"
-                                            @class(['btn', 'btn-primary', 'py-md-3', 'px-md-5', 'animated', 'slideInLeft'])>Ver tienda</a>
+                                            @class([
+                                                'btn',
+                                                'btn-primary',
+                                                'py-md-3',
+                                                'px-md-5',
+                                                'animated',
+                                                'slideInLeft',
+                                            ])>Ver tienda</a>
                                     </div>
                                 </div>
                             </div>
@@ -33,47 +66,48 @@
     <!-- Carousel End -->
 
     <!-- Feature Start | Estadísticas del sitio -->
-<div @class(['container-xxl', 'py-5'])>
-    <div @class(['container'])>
-        <div @class(['row', 'g-3', 'justify-content-center'])>
-            @php
-                $items = [
-                    [
-                        'icono' => 'fa-store',
-                        'valor' => number_format($stats['tiendas'], 0, ',', '.'),
-                        'texto' => 'Tiendas activas',
-                    ],
-                    [
-                        'icono' => 'fa-shopping-bag',
-                        'valor' => number_format($stats['ventas'], 0, ',', '.'),
-                        'texto' => 'Ventas realizadas',
-                    ],
-                    [
-                        'icono' => 'fa-coins',
-                        'valor' => '₡' . number_format($stats['ganancias'], 0, ',', '.'),
-                        'texto' => 'Total vendido',
-                    ],
-                ];
-            @endphp
+    <div @class(['container-xxl', 'py-5'])>
+        <div @class(['container'])>
+            <div @class(['row', 'g-3', 'justify-content-center'])>
+                @php
+                    $items = [
+                        [
+                            'icono' => 'fa-store',
+                            'valor' => number_format($stats['tiendas'], 0, ',', '.'),
+                            'texto' => 'Tiendas activas',
+                        ],
+                        [
+                            'icono' => 'fa-shopping-bag',
+                            'valor' => number_format($stats['ventas'], 0, ',', '.'),
+                            'texto' => 'Ventas realizadas',
+                        ],
+                        [
+                            'icono' => 'fa-coins',
+                            'valor' => '₡' . number_format($stats['ganancias'], 0, ',', '.'),
+                            'texto' => 'Total vendido',
+                        ],
+                    ];
+                @endphp
 
-            @foreach ($items as $item)
-                <div class="col-12 col-md-4 wow fadeIn" data-wow-delay="{{ 0.1 + $loop->index * 0.2 }}s">
-                    <div class="bg-white rounded-3 shadow-sm py-4 px-3 h-100 d-flex flex-column align-items-center justify-content-center text-center border">
-                        <div class="d-flex align-items-center justify-content-center gap-3 mb-2">
-                            <div class="d-flex align-items-center justify-content-center bg-white rounded-3 flex-shrink-0"
-                                style="width: 60px; height: 60px;">
-                                <i class="fa {{ $item['icono'] }} fa-2x text-primary"></i>
+                @foreach ($items as $item)
+                    <div class="col-12 col-md-4 wow fadeIn" data-wow-delay="{{ 0.1 + $loop->index * 0.2 }}s">
+                        <div
+                            class="bg-white rounded-3 shadow-sm py-4 px-3 h-100 d-flex flex-column align-items-center justify-content-center text-center border">
+                            <div class="d-flex align-items-center justify-content-center gap-3 mb-2">
+                                <div class="d-flex align-items-center justify-content-center bg-white rounded-3 flex-shrink-0"
+                                    style="width: 60px; height: 60px;">
+                                    <i class="fa {{ $item['icono'] }} fa-2x text-primary"></i>
+                                </div>
+                                <h2 class="display-6 text-primary mb-0 fw-bold">{{ $item['valor'] }}</h2>
                             </div>
-                            <h2 class="display-6 text-primary mb-0 fw-bold">{{ $item['valor'] }}</h2>
+                            <h5 class="text-muted mb-0 fw-normal">{{ $item['texto'] }}</h5>
                         </div>
-                        <h5 class="text-muted mb-0 fw-normal">{{ $item['texto'] }}</h5>
                     </div>
-                </div>
-            @endforeach
-           
+                @endforeach
+
+            </div>
         </div>
     </div>
-</div>
 
     <!-- Feature End -->
 
@@ -91,7 +125,14 @@
                                 <img @class(['img-fluid', 'w-100']) style="height:220px;object-fit:cover"
                                     src="{{ $p->imagenUrl() }}" alt="{{ $p->nombre }}">
                             </div>
-                            <div @class(['p-4', 'text-center', 'border', 'border-5', 'border-light', 'border-top-0'])>
+                            <div @class([
+                                'p-4',
+                                'text-center',
+                                'border',
+                                'border-5',
+                                'border-light',
+                                'border-top-0',
+                            ])>
                                 <h5 @class(['mb-1'])>{{ $p->nombre }}</h5>
                                 <small @class(['text-muted', 'd-block', 'mb-2'])>{{ $p->tienda->nombre }}</small>
                                 <p @class(['fw-bold', 'text-primary', 'mb-1'])>
@@ -127,11 +168,19 @@
                                 <img @class(['img-fluid', 'w-100']) style="height:200px;object-fit:cover"
                                     src="{{ $t->bannerUrl('600x300') }}" alt="Banner de {{ $t->nombre }}">
                             </div>
-                            <div @class(['border', 'border-5', 'border-light', 'border-top-0', 'p-4', 'text-center'])>
+                            <div @class([
+                                'border',
+                                'border-5',
+                                'border-light',
+                                'border-top-0',
+                                'p-4',
+                                'text-center',
+                            ])>
                                 <img src="{{ $t->logoUrl('80x80') }}" @class(['rounded-circle', 'mb-2'])
                                     style="width:60px;height:60px;object-fit:cover" alt="Logo de {{ $t->nombre }}">
                                 <h5 @class(['mb-2'])>{{ $t->nombre }}</h5>
-                                <p @class(['mb-3'])>{{ \Illuminate\Support\Str::limit($t->descripcion, 80) }}</p>
+                                <p @class(['mb-3'])>{{ \Illuminate\Support\Str::limit($t->descripcion, 80) }}
+                                </p>
                                 <a @class(['fw-medium']) href="{{ route('tiendas.show', $t->id_tienda) }}">
                                     Ver tienda<i @class(['fa', 'fa-arrow-right', 'ms-2'])></i>
                                 </a>
