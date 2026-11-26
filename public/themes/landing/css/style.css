@@ -656,3 +656,23 @@
 .search-box button:hover {
     background-color: #80664f;
 }
+   
+body {
+    background-color: #faf8f5;
+    /* El linear-gradient con 0.85 de opacidad suaviza el patrón; súbelo a 0.92 si lo quieres aún más sutil */
+    background-image: 
+        linear-gradient(rgba(250, 248, 245, 0.56), rgba(250, 248, 245, 0.85)),
+        url("/uploads/fondo.jpeg");
+    background-repeat: repeat;
+    background-size: 100% 100%, 320px auto; /* El primer valor es para el velo y el segundo (320px) para el tamaño del patrón */
+    background-attachment: fixed;
+}
+
+
+
+    /* Asegúrate de que las tarjetas mantengan fondo blanco sólido */
+    .card,
+    .product-item,
+    .category-box {
+        background-color: #ffffff !important;
+    }

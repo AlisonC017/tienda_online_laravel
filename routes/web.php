@@ -34,10 +34,6 @@ Route::get('/login', [ControllerNavigation::class, 'login'])->name('login');
 Route::post('/login', [ControllerAuth::class, 'login'])->name('login.post');
 Route::post('/register', [ControllerAuth::class, 'register'])->name('register.post');
 
-// GOOGLE
-Route::get('/auth/google', [ControllerAuth::class, 'redirectToGoogle'])->name('google.redirect');
-Route::get('/auth/google/callback', [ControllerAuth::class, 'handleGoogleCallback']);
-
 // RUTAS PROTEGIDAS
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [ControllerNavigation::class, 'dashboard'])->name('dashboard');
@@ -98,6 +94,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::patch('/productos/{producto}/estado', [ProductoController::class, 'cambiarEstado'])
             ->name('productos.estado');
+
 
         // PEDIDOS
         Route::get('/pedidos', [PedidoTiendaController::class, 'index'])
