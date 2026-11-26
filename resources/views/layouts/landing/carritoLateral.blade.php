@@ -4,7 +4,8 @@
 
     <div class="offcanvas-header border-bottom pb-3">
         <div class="d-flex align-items-center gap-2">
-            <h4 class="offcanvas-title fw-bold m-0" id="offcanvasCartLabel" style="color: #5a3707;">
+            <h4 class="offcanvas-title fw-bold m-0" id="offcanvasCartLabel"
+                style="color: #8f5b11; font-family: 'Satisfy', cursive; font-size: 1.75rem;">
                 Carrito de Compras</h4>
             <span class="badge rounded-circle bg-warning text-white fs-6">{{ $carritoCantidad }}</span>
         </div>
@@ -25,7 +26,7 @@
                     <span class="fw-bold text-secondary">₡{{ number_format($item->subtotal, 0, ',', '.') }}</span>
                 </div>
             @empty
-                <p class="text-muted text-center my-4">Tu carrito está vacío.</p>
+                <p class="text-muted text-center my-4">Tu carrito está vacío </p>
             @endforelse
 
             <div class="d-flex justify-content-between align-items-center pt-3">
@@ -35,18 +36,19 @@
         </div>
 
         <div class="pt-3 d-grid gap-2">
-            <a href="{{ route('carrito.index') }}" class="btn text-white py-3 fw-bold rounded-3 fs-5 shadow-sm"
-                style="background-color: #5a3707;">
+            <a href="{{ route('carrito.index') }}"
+                class="btn text-white fw-semibold rounded-3 shadow-sm d-flex align-items-center justify-content-center"
+                style="background-color:  #8f5b11; height: 42px; padding: 0 16px; line-height: 1;">
                 Ver carrito
             </a>
             @if ($carritoData->isNotEmpty())
-                <a href="{{ route('checkout') }}" class="btn text-white py-3 fw-bold rounded-3 fs-5 shadow-sm"
-                    style="background-color: #5a3707;">
+                <a href="{{ route('checkout') }}"
+                    class="btn text-white fw-semibold rounded-3 shadow-sm d-flex align-items-center justify-content-center"
+                    style="background-color:  #8f5b11; height: 42px; padding: 0 16px; line-height: 1;">
                     Pagar
                 </a>
             @endif
         </div>
+
     </div>
 </div>
-
-

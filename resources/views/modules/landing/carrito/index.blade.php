@@ -4,7 +4,7 @@
 
     <div class="container-xxl py-5">
         <div class="container">
-            <h1 class="display-6 mb-4">Carrito de compras</h1>
+            <h1 class="display-6 mb-4" style="font-family: 'Satisfy', cursive;">Carrito de compras</h1>
 
             @if (session('ok'))
                 <div class="alert alert-success">{{ session('ok') }}</div>

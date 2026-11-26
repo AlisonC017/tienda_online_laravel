@@ -17,7 +17,8 @@
                     <tr>
                         <td style="background:#5a3707; padding:25px; text-align:center;">
                             <h1 style="margin:0; color:#ffffff; font-size:26px;">CrikoStore</h1>
-                            <p style="margin:5px 0 0; color:#e8d9c4; font-size:14px;">Compra 100% segura</p>
+                            <p style="margin:5px 0 0; color:#e8d9c4; font-size:14px; font-family: 'Satisfy', cursive;">
+                                Compra 100% segura</p>
                         </td>
                     </tr>
 
@@ -41,14 +42,17 @@
                                 <tr style="border-bottom:1px solid #eee;">
                                     <td style="color:#888; font-size:13px;">Correo</td>
                                     <td style="color:#333; font-size:15px;">
-                                        <a href="mailto:{{ $correo }}" style="color:#AB7442;">{{ $correo }}</a>
+                                        <a href="mailto:{{ $correo }}"
+                                            style="color:#AB7442;">{{ $correo }}</a>
                                     </td>
                                 </tr>
                             </table>
 
-                            <div style="margin-top:20px; background:#f4ede3; border-left:4px solid #AB7442; padding:16px 18px; border-radius:4px;">
+                            <div
+                                style="margin-top:20px; background:#f4ede3; border-left:4px solid #AB7442; padding:16px 18px; border-radius:4px;">
                                 <p style="margin:0 0 6px; color:#5a3707; font-size:13px;"><strong>Mensaje</strong></p>
-                                <p style="margin:0; color:#333; font-size:15px; line-height:1.6;">{!! nl2br(e($mensaje)) !!}</p>
+                                <p style="margin:0; color:#333; font-size:15px; line-height:1.6;">
+                                    {!! nl2br(e($mensaje)) !!}</p>
                             </div>
 
                             <p style="text-align:center; margin:28px 0 8px;">
@@ -61,7 +65,8 @@
                     </tr>
 
                     <tr>
-                        <td style="background:#f9f9f9; padding:20px 30px; text-align:center; color:#999; font-size:12px;">
+                        <td
+                            style="background:#f9f9f9; padding:20px 30px; text-align:center; color:#999; font-size:12px;">
                             Siquirres, Limón, Costa Rica · Lunes - Sábado 9:00 AM - 10:00 PM<br>
                             Puedes responder directamente a este correo para contestarle al visitante.
                         </td>

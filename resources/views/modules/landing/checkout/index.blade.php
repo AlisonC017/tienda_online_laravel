@@ -3,7 +3,7 @@
 @section('contenido')
     <div class="container-xxl py-5">
         <div class="container">
-            <h1 class="display-6 mb-4">Finalizar pedido</h1>
+            <h1 class="display-6 mb-4" style="font-family: 'Satisfy', cursive;">Finalizar pedido</h1>
 
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>

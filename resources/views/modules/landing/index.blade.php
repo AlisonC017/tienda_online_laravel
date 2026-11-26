@@ -44,7 +44,11 @@
                                         ])
                                             style="width:120px;height:120px;object-fit:cover"
                                             alt="Logo de {{ $t->nombre }}">
-                                        <h1 @class(['display-4', 'text-white', 'animated', 'slideInDown', 'mb-4'])>{{ $t->nombre }}</h1>
+                                        <h1 @class(['display-3', 'text-white', 'animated', 'slideInDown', 'mb-4'])
+                                            style="font-family: 'Satisfy', cursive !important; text-shadow: 0 3px 10px rgba(0, 0, 0, 0.45);">
+                                            {{ $t->nombre }}
+                                        </h1>
+
                                         <a href="{{ route('tiendas.show', $t->id_tienda) }}"
                                             @class([
                                                 'btn',
@@ -115,7 +119,7 @@
     <div @class(['container-xxl', 'py-5'])>
         <div @class(['container'])>
             <div @class(['section-title', 'text-center'])>
-                <h1 @class(['display-5', 'mb-5'])>Productos más vendidos</h1>
+                <h1 @class(['display-5', 'mb-5']) style="font-family: 'Satisfy', cursive;">Productos más vendidos</h1>
             </div>
             <div @class(['row', 'g-4'])>
                 @forelse ($topVentas as $p)
@@ -138,7 +142,8 @@
                                 <p @class(['fw-bold', 'text-primary', 'mb-1'])>
                                     ₡{{ number_format($p->precio, 0, ',', '.') }}
                                 </p>
-                                <small @class(['d-block', 'mb-3'])>{{ (int) $p->total_vendido }} vendidos</small>
+                                <small @class(['d-block', 'mb-3'])>{{ (int) $p->total_vendido }}
+                                    vendidos</small>
                                 <a @class(['fw-medium']) href="{{ route('productos.show', $p->id_producto) }}">
                                     Ver producto<i @class(['fa', 'fa-arrow-right', 'ms-2'])></i>
                                 </a>
@@ -158,7 +163,7 @@
     <div @class(['container-xxl', 'py-5'])>
         <div @class(['container'])>
             <div @class(['section-title', 'text-center'])>
-                <h1 @class(['display-5', 'mb-5'])>Tiendas</h1>
+                <h1 @class(['display-5', 'mb-5']) style="font-family: 'Satisfy', cursive;">Tiendas</h1>
             </div>
             <div @class(['row', 'g-4'])>
                 @forelse ($tiendas as $t)
@@ -179,7 +184,8 @@
                                 <img src="{{ $t->logoUrl('80x80') }}" @class(['rounded-circle', 'mb-2'])
                                     style="width:60px;height:60px;object-fit:cover" alt="Logo de {{ $t->nombre }}">
                                 <h5 @class(['mb-2'])>{{ $t->nombre }}</h5>
-                                <p @class(['mb-3'])>{{ \Illuminate\Support\Str::limit($t->descripcion, 80) }}
+                                <p @class(['mb-3'])>
+                                    {{ \Illuminate\Support\Str::limit($t->descripcion, 80) }}
                                 </p>
                                 <a @class(['fw-medium']) href="{{ route('tiendas.show', $t->id_tienda) }}">
                                     Ver tienda<i @class(['fa', 'fa-arrow-right', 'ms-2'])></i>

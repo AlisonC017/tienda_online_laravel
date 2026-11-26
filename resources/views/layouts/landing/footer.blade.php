@@ -3,7 +3,7 @@
         <div class="row g-4">
             <!-- Columna 1: 4 espacios -->
             <div class="col-lg-4 col-md-6">
-                <h4 class="text-light mb-4">Dirección y Contacto</h4>
+                <h4 class="text-light mb-4" style="font-family: 'Satisfy', cursive;">Dirección y Contacto</h4>
                 <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Siquirres, Limón, Costa Rica</p>
                 <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+506 0000 0000</p>
                 <p class="mb-2"><i class="fa fa-envelope me-3"></i>crikoStore.info@gmail.com</p>
@@ -19,7 +19,7 @@
 
             <!-- Columna 2: 2 espacios -->
             <div class="col-lg-2 col-md-6">
-                <h4 class="text-light mb-4">Enlaces</h4>
+                <h4 class="text-light mb-4" style="font-family: 'Satisfy', cursive;">Enlaces</h4>
                 <a class="btn btn-link" href="{{ route('inicio') }}">Inicio</a>
                 <a class="btn btn-link" href="{{ route('productos.index') }}">Productos</a>
                 <a class="btn btn-link" href="{{ route('tiendas.index') }}">Tiendas</a>
@@ -28,13 +28,14 @@
 
             <!-- Columna 3: 3 espacios -->
             <div class="col-lg-3 col-md-6">
-                <h4 class="text-light mb-4">¿Qué es CrickoStore?</h4>
-                <p class="mb-0">Un directorio comercial donde varias tiendas locales ofrecen sus productos y tú puedes armar un solo pedido con todas ellas.</p>
+                <h4 class="text-light mb-4" style="font-family: 'Satisfy', cursive;">¿Qué es CrickoStore?</h4>
+                <p class="mb-0">Un directorio comercial donde varias tiendas locales ofrecen sus productos y tú puedes
+                    armar un solo pedido con todas ellas.</p>
             </div>
 
             <!-- Columna 4: 3 espacios -->
             <div class="col-lg-3 col-md-6">
-                <h4 class="text-light mb-4">¿Tienes una tienda?</h4>
+                <h4 class="text-light mb-4" style="font-family: 'Satisfy', cursive;">¿Tienes una tienda?</h4>
                 <p>Publica tus productos en nuestro directorio y llega a más clientes en toda la zona.</p>
                 <a href="{{ route('register') }}" class="btn btn-primary py-2 px-4">Registrar mi tienda</a>
             </div>

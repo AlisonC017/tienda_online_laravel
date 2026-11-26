@@ -1,13 +1,14 @@
 @php
     $tiendaHeader = Auth::user()->tienda;
-    $avatar = ($tiendaHeader && $tiendaHeader->logo && file_exists(public_path('uploads/' . basename($tiendaHeader->logo))))
-        ? asset('uploads/' . basename($tiendaHeader->logo))
-        : Auth::user()->imagen();
+    $avatar =
+        $tiendaHeader && $tiendaHeader->logo && file_exists(public_path('uploads/' . basename($tiendaHeader->logo)))
+            ? asset('uploads/' . basename($tiendaHeader->logo))
+            : Auth::user()->imagen();
 @endphp
 
 <div class="main-header">
     <div class="main-header-logo">
-        
+
         <div class="logo-header" data-background-color="dark">
             <a href="{{ route('tienda.index') }}" class="logo">
                 <img src="{{ asset('uploads/logo.png') }}" alt="navbar brand" class="navbar-brand"
@@ -25,9 +26,9 @@
                 <i class="gg-more-vertical-alt"></i>
             </button>
         </div>
-        
+
     </div>
-    
+
     <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
         <div class="container-fluid">
 
@@ -46,36 +47,52 @@
                     </ul>
                 </li>
 
+                <!-- Notificaciones de pedidos pendientes -->
                 <li class="nav-item topbar-icon dropdown hidden-caret">
-                    <a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button"
+                    <a class="nav-link dropdown-toggle text-dark" href="#" id="notifDropdown" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-bell"></i>
-                        <span class="notification">4</span>
+                        <i class="fas fa-bell text-dark fs-5"></i>
+                        @if ($notificacionesPanel->count() > 0)
+                            <span
+                                class="notification bg-warning text-dark fw-bold">{{ $notificacionesPanel->count() }}</span>
+                        @endif
                     </a>
                     <ul class="dropdown-menu notif-box animated fadeIn" aria-labelledby="notifDropdown">
                         <li>
                             <div class="dropdown-title">
-                                You have 4 new notification
+                                {{ $notificacionesPanel->count() > 0
+                                    ? 'Tienes ' .
+                                        $notificacionesPanel->count() .
+                                        ' ' .
+                                        ($notificacionesPanel->count() === 1 ? 'pedido pendiente' : 'pedidos pendientes')
+                                    : 'No tienes notificaciones nuevas' }}
                             </div>
                         </li>
                         <li>
                             <div class="notif-scroll scrollbar-outer">
                                 <div class="notif-center">
-                                    <a href="#">
-                                        <div class="notif-icon notif-primary">
-                                            <i class="fa fa-user-plus"></i>
+                                    @forelse ($notificacionesPanel as $notif)
+                                        <a href="{{ $notif['url'] }}">
+                                            <div class="notif-icon notif-warning">
+                                                <i class="fas {{ $notif['icono'] }} text-white"></i>
+                                            </div>
+                                            <div class="notif-content">
+                                                <span class="block">{{ $notif['titulo'] }}</span>
+                                                <span class="time">{{ $notif['tiempo'] }}</span>
+                                            </div>
+                                        </a>
+                                    @empty
+                                        <div class="text-center text-muted py-3 small">
+                                            Todo está al día
                                         </div>
-                                        <div class="notif-content">
-                                            <span class="block"> New user registered </span>
-                                            <span class="time">5 minutes ago</span>
-                                        </div>
-                                    </a>
+                                    @endforelse
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <a class="see-all" href="javascript:void(0);">See all notifications<i
-                                    class="fa fa-angle-right"></i>
+                            <a class="see-all"
+                                href="{{ Auth::user()->rol === 'administrador' ? route('admin.pedidos.index') : route('tienda.pedidos.index') }}">
+                                Ver todos los pedidos <i class="fas fa-angle-right"></i>
                             </a>
                         </li>
                     </ul>
@@ -99,7 +116,8 @@
                             <li>
                                 <div class="user-box">
                                     <div class="avatar-lg">
-                                        <img src="{{ $avatar }}" alt="Foto de perfil" referrerpolicy="no-referrer"
+                                        <img src="{{ $avatar }}" alt="Foto de perfil"
+                                            referrerpolicy="no-referrer"
                                             onerror="this.onerror=null;this.src='{{ asset('uploads/user.png') }}'"
                                             class="avatar-img rounded" />
                                     </div>

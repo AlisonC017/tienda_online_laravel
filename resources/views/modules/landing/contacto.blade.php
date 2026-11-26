@@ -5,7 +5,7 @@
         <div class="container">
 
             <div class="section-title text-center">
-                <h1 class="display-5 mb-5">Contacto</h1>
+                <h1 class="display-5 mb-5" style="font-family: 'Satisfy', cursive;">Contacto</h1>
             </div>
 
             <div class="row g-5">
@@ -105,10 +105,10 @@
 
 @section('javascrip')
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('contact-form');
 
-            form.addEventListener('submit', function (e) {
+            form.addEventListener('submit', function(e) {
                 e.preventDefault();
 
                 if (!form.checkValidity()) {

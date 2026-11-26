@@ -4,7 +4,7 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="section-title text-center">
-                <h1 class="display-5 mb-5">Tiendas</h1>
+                <h1 class="display-5 mb-5" style="font-family: 'Satisfy', cursive;">Tiendas</h1>
             </div>
 
             <form method="GET" action="{{ route('tiendas.index') }}" class="row g-2 justify-content-center mb-5">
@@ -34,7 +34,8 @@
                                     style="width: 90px; height: 90px; object-fit: cover; margin-top: -45px;">
                                 <div class="p-3">
                                     <h5 class="fw-bold text-dark">{{ $tienda->nombre }}</h5>
-                                    <p class="text-muted small">{{ \Illuminate\Support\Str::limit($tienda->descripcion, 90) }}</p>
+                                    <p class="text-muted small">
+                                        {{ \Illuminate\Support\Str::limit($tienda->descripcion, 90) }}</p>
                                     <a href="{{ route('tiendas.show', $tienda->id_tienda) }}"
                                         class="btn btn-primary btn-sm rounded-pill px-4">Ver tienda</a>
                                 </div>
