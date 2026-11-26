@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tienda;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Laravel\Socialite\Socialite;
+use Laravel\Socialite\Facades\Socialite;
 
 class ControllerAuth extends Controller
 {
@@ -28,6 +29,10 @@ class ControllerAuth extends Controller
         $user->correo = $request->correo;
         $user->password = Hash::make($request->password);
         $user->save();
+        Tienda::firstOrCreate(
+            ['id_usuario' => $user->id_usuario],
+            ['nombre' => $user->nombre, 'descripcion' => 'Bienvenido a mi tienda', 'destacada' => false, 'activa' => true]
+        );
 
         return redirect()->route('login');
     }
