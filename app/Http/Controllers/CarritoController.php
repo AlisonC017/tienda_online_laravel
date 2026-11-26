@@ -25,14 +25,15 @@ class CarritoController extends Controller
     {
         $data = $request->validate(
             [
-                'id_producto' => 'required|integer',
+                'nombre' => 'required|string|max:100',
                 'cantidad' => 'required|integer|min:1|max:99',
             ]
         );
 
         $producto = Producto::with('tienda')
-            ->where('id_producto', $data['id_producto'])
-            ->where('activo', 1)->first();
+            ->where('nombre', 'like', '%' . $data['nombre'] . '%')
+            ->where('activo', 1)
+            ->first();
 
         if (!$producto || !$producto->tienda->activa) {
             return back()->with('error', 'Producto no disponible :b');
@@ -83,7 +84,7 @@ class CarritoController extends Controller
         if (empty($carrito)) {
             return collect();
         }
-        
+
         $productos = Producto::with('tienda')
             ->whereIn('id_producto', array_keys($carrito))
             ->where('activo', 1)

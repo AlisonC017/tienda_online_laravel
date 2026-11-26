@@ -18,17 +18,17 @@
 
             <form action="{{ route('carrito.store') }}" method="POST" class="row g-2 mb-4 p-3 border rounded bg-light">
                 @csrf
-                <div class="col-auto">
-                    <input type="number" name="id_producto" class="form-control" placeholder="id_producto" required>
+                <div class="col">
+                    <input type="text" name="nombre" class="form-control"
+                        placeholder="Escribe el nombre del producto..." required>
                 </div>
                 <div class="col-auto">
                     <input type="number" name="cantidad" class="form-control" value="1" min="1" required>
                 </div>
                 <div class="col-auto">
-                    <button class="btn btn-primary">Agregar (prueba)</button>
+                    <button class="btn btn-primary">Agregar</button>
                 </div>
             </form>
-
             @if ($data->isEmpty())
                 <p class="text-muted">Tu carrito está vacio.</p>
                 <a href="/p" class="btn btn-primary">Ver productos</a>

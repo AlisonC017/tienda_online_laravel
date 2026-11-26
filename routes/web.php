@@ -10,8 +10,8 @@ use App\Http\Controllers\PedidoTiendaController;
 use App\Http\Controllers\PedidoAdminController;
 use App\Http\Controllers\AdminTiendaController;
 use App\Http\Controllers\ProductoPublicoController;
-use App\Http\Controllers\TiendaPublicaController;
 use App\Http\Controllers\TiendaPerfilController;
+use App\Http\Controllers\TiendaPublicaController;
 
 // PUBLICO
 Route::get('/', [ControllerNavigation::class, 'landing'])->name('inicio');
