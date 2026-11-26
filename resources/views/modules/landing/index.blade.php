@@ -102,7 +102,9 @@
                                     style="width: 60px; height: 60px;">
                                     <i class="fa {{ $item['icono'] }} fa-2x text-primary"></i>
                                 </div>
-                                <h2 class="display-6 text-primary mb-0 fw-bold">{{ $item['valor'] }}</h2>
+                                {{-- CAMBIO: se agregó data-stat --}}
+                                <h2 class="display-6 text-primary mb-0 fw-bold" data-stat="{{ $loop->index }}">
+                                    {{ $item['valor'] }}</h2>
                             </div>
                             <h5 class="text-muted mb-0 fw-normal">{{ $item['texto'] }}</h5>
                         </div>
@@ -203,4 +205,33 @@
         </div>
     </div>
     <!-- Projects End -->
+
+    <script>
+        (function() {
+            async function actualizarStats() {
+                if (document.hidden) return;
+
+                try {
+                    const r = await fetch(window.location.pathname, {
+                        credentials: 'same-origin',
+                        cache: 'no-store'
+                    });
+                    if (!r.ok) return;
+
+                    const doc = new DOMParser().parseFromString(await r.text(), 'text/html');
+
+                    doc.querySelectorAll('[data-stat]').forEach(function(nuevo) {
+                        const actual = document.querySelector('[data-stat="' + nuevo.dataset.stat + '"]');
+                        if (actual && actual.textContent !== nuevo.textContent) {
+                            actual.textContent = nuevo.textContent;
+                        }
+                    });
+                } catch (e) {
+                    // si falla la red, reintenta en el siguiente ciclo
+                }
+            }
+
+            setInterval(actualizarStats, 5000);
+        })();
+    </script>
 @endsection
